@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#101828"
+    tools:context=".Screen.HDWallpaper.SuccessActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/img_bg_phu">
+
+        <ImageView
+            android:id="@+id/imgsuccess"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:background="@drawable/ic_success"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/text_success"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Successfully!"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:fontFamily="@font/plusjakartasans_medium"
+            app:layout_constraintTop_toBottomOf="@+id/imgsuccess"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+        
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_done"
+            android:layout_width="328dp"
+            android:layout_height="48dp"
+            android:text="Done"
+            android:textColor="@color/white"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/custom_btn"
+            app:layout_constraintTop_toBottomOf="@+id/text_success"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

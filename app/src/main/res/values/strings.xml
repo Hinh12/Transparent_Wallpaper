@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name" translatable="false">Transparent_Wallpaper</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="language">Language</string>
+    <string name="this_action_may_contain_advertising">This action may contain advertising</string>
+    <string name="transparency">Transparency</string>
+    <string name="reveal_your_screens_beauty">Reveal your screen\'s beauty with Transparent Wallpaper.</string>
+    <string name="crystal">Crystal</string>
+    <string name="clarity_and_style">Clarity and style meet in Transparent Wallpaper.</string>
+    <string name="clearvision">ClearVision</string>
+    <string name="elevate_your_screens_allure">Elevate your screen\'s allure with Transparent Wallpaper.</string>
+    <string name="next">Next</string>
+    <string name="transparent_wallpaper">Transparent Wallpaper</string>
+    <string name="Rate">Rate</string>
+    <string name="Share">Share</string>
+    <string name="Feedback">Feedback</string>
+    <string name="Policy">Policy</string>
+    <string name="Explore">Explore</string>
+    <string name="lock_screen">Lock Screen</string>
+    <string name="home_screen">Home Screen</string>
+    <string name="both">Both</string>
+    <string name="lock_screen_wallpaper_set_successfully">Lock screen wallpaper set successfully</string>
+    <string name="done">Done</string>
+    <string name="hd_wallpapers">HD Wallpapers</string>
+    <string name="set_wallpapers">Set Wallpapers</string>
+    <string name="swipe_to_see_more">Swipe to see more</string>
+    <string name="set_wallpaper">Set Wallpaper</string>
+    <string name="typing_wallpaper">Typing Wallpaper</string>
+    <string name="mirror_wallpaper">Mirror Wallpaper</string>
+    <string name="select_option">SELECT OPTION</string>
+    <string name="ok">Ok</string>
+    <string name="please_select_screen">Please select screen</string>
+    <string name="how_is_your_experience">How is your experience</string>
+    <string name="your_opinion_means_to_us">Your opinion means to us</string>
+</resources>

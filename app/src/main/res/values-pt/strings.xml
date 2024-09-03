@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="first_fragment_label">Primeiro Fragmento</string>
+    <string name="second_fragment_label">Segundo Fragmento</string>
+    <string name="previous">Anterior</string>
+    <string name="hello_blank_fragment">Olá fragmento em branco</string>
+    <string name="language">Idioma</string>
+    <string name="this_action_may_contain_advertising">Esta ação pode conter publicidade</string>
+    <string name="transparency">Transparência</string>
+    <string name="reveal_your_screens_beauty">Revele a beleza da sua tela com Papel de Parede Transparente.</string>
+    <string name="crystal">Cristal</string>
+    <string name="clarity_and_style">Clareza e estilo se encontram no Papel de Parede Transparente.</string>
+    <string name="clearvision">Visão Clara</string>
+    <string name="elevate_your_screens_allure">Eleve o charme da sua tela com Papel de Parede Transparente.</string>
+    <string name="next">Próximo</string>
+    <string name="transparent_wallpaper">Papel de Parede Transparente</string>
+    <string name="Rate">Avaliar</string>
+    <string name="Share">Compartilhar</string>
+    <string name="Feedback">Feedback</string>
+    <string name="Policy">Política</string>
+    <string name="Explore">Explorar</string>
+    <string name="lock_screen">Tela de Bloqueio</string>
+    <string name="home_screen">Tela Inicial</string>
+    <string name="both">Ambos</string>
+    <string name="lock_screen_wallpaper_set_successfully">Papel de parede da tela de bloqueio definido com sucesso</string>
+    <string name="done">Concluído</string>
+    <string name="hd_wallpapers">Papéis de Parede HD</string>
+    <string name="set_wallpapers">Definir Papéis de Parede</string>
+    <string name="swipe_to_see_more">Deslize para ver mais</string>
+    <string name="set_wallpaper">Definir Papel de Parede</string>
+    <string name="typing_wallpaper">Papel de Parede de Digitação</string>
+    <string name="mirror_wallpaper">Papel de Parede de Espelho</string>
+    <string name="select_option">SELECIONAR OPÇÃO</string>
+    <string name="ok">Ok</string>
+    <string name="please_select_screen">Por favor selecione a tela</string>
+    <string name="how_is_your_experience">Como foi sua experiência?</string>
+    <string name="your_opinion_means_to_us">Sua opinião significa muito para nós</string>
+
+</resources>

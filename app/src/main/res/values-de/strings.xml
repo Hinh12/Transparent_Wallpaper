@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="first_fragment_label">Erstes Fragment</string>
+    <string name="second_fragment_label">Zweites Fragment</string>
+    <string name="previous">Vorherige</string>
+    <string name="hello_blank_fragment">Hallo leeres Fragment</string>
+    <string name="language">Sprache</string>
+    <string name="this_action_may_contain_advertising">Diese Aktion kann Werbung enthalten</string>
+    <string name="transparency">Transparenz</string>
+    <string name="reveal_your_screens_beauty">Zeigen Sie die Schönheit Ihres Bildschirms mit Transparentem Hintergrundbild.</string>
+    <string name="crystal">Kristall</string>
+    <string name="clarity_and_style">Klarheit und Stil treffen sich im Transparenten Hintergrundbild.</string>
+    <string name="clearvision">Klare Sicht</string>
+    <string name="elevate_your_screens_allure">Erhöhen Sie die Anziehungskraft Ihres Bildschirms mit Transparentem Hintergrundbild.</string>
+    <string name="next">Weiter</string>
+    <string name="transparent_wallpaper">Transparente Tapete</string>
+    <string name="Rate">Bewerten</string>
+    <string name="Share">Teilen</string>
+    <string name="Feedback">Rückmeldung</string>
+    <string name="Policy">Richtlinie</string>
+    <string name="Explore">Erkunden</string>
+    <string name="lock_screen">Sperrbildschirm</string>
+    <string name="home_screen">Startbildschirm</string>
+    <string name="both">Beide</string>
+    <string name="lock_screen_wallpaper_set_successfully">Sperrbildschirm Hintergrund erfolgreich festgelegt</string>
+    <string name="done">Fertig</string>
+    <string name="hd_wallpapers">HD Hintergrundbilder</string>
+    <string name="set_wallpapers">Hintergrundbilder festlegen</string>
+    <string name="swipe_to_see_more">Wischen Sie, um mehr zu sehen</string>
+    <string name="set_wallpaper">Hintergrund festlegen</string>
+    <string name="typing_wallpaper">Tippen Hintergrundbild</string>
+    <string name="mirror_wallpaper">Spiegel Hintergrundbild</string>
+    <string name="select_option">OPTION WÄHLEN</string>
+    <string name="ok">Ok</string>
+    <string name="please_select_screen">Bitte Bildschirm auswählen</string>
+    <string name="how_is_your_experience">Wie ist Ihr Erlebnis?</string>
+    <string name="your_opinion_means_to_us">Ihre Meinung zählt für uns</string>
+
+</resources>

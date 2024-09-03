@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cstSelect"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="15dp"
+    android:background="@drawable/custom__dialog_select_option"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        android:paddingVertical="30dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/plusjakartasans_regular"
+            android:text="@string/select_option"
+            android:textColor="#ffffff"
+            android:textSize="16sp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="250dp"
+            android:layout_height="44dp"
+            android:background="@drawable/custom_button_select_option"
+            android:paddingHorizontal="15dp"
+            android:id="@+id/cst_LockScreen"
+            android:layout_marginTop="24dp">
+
+            <ImageView
+                android:id="@+id/imgLockScreen"
+                android:layout_width="14.5dp"
+                android:layout_height="18.6dp"
+                android:src="@drawable/ic_lock_screen"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="@string/lock_screen"
+                android:textColor="#ffffff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/imgLockScreen"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/imgradioLockScreen"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_select_options"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="250dp"
+            android:layout_height="44dp"
+            android:background="@drawable/custom_button_select_option"
+            android:paddingHorizontal="15dp"
+            android:id="@+id/cst_HomeScreen"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:id="@+id/imgHomeScreen"
+                android:layout_width="14.5dp"
+                android:layout_height="18.6dp"
+                android:src="@drawable/ic_home_screen"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="@string/home_screen"
+                android:textColor="#ffffff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/imgHomeScreen"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/imgradioHomeScreen"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_select_options"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="250dp"
+            android:layout_height="44dp"
+            android:background="@drawable/custom_button_select_option"
+            android:paddingHorizontal="15dp"
+            android:id="@+id/cst_BothScreen"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:id="@+id/imgBothScreen"
+                android:layout_width="14.5dp"
+                android:layout_height="18.6dp"
+                android:src="@drawable/ic_both_screen"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="@string/both"
+                android:textColor="#ffffff"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/imgBothScreen"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/imgradioBothScreen"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/ic_select_options"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSelectOptions"
+            android:layout_width="250dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/custom_button_set_wallpaper"
+            android:text="@string/ok"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

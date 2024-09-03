@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="first_fragment_label">पहला टुकड़ा</string>
+    <string name="second_fragment_label">दूसरा टुकड़ा</string>
+    <string name="previous">पहले का</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">नमस्कार रिक्त अंश</string>
+    <string name="language">भाषा</string>
+    <string name="this_action_may_contain_advertising">इस कार्रवाई में विज्ञापन शामिल हो सकता है</string>
+    <string name="transparency">पारदर्शिता</string>
+    <string name="reveal_your_screens_beauty">पारदर्शी वॉलपेपर के साथ अपनी स्क्रीन की सुंदरता को उजागर करें।</string>
+    <string name="crystal">क्रिस्टल</string>
+    <string name="clarity_and_style">पारदर्शी वॉलपेपर में स्पष्टता और शैली मिलती है।</string>
+    <string name="clearvision">क्लीयरविज़न</string>
+    <string name="elevate_your_screens_allure">पारदर्शी वॉलपेपर के साथ अपनी स्क्रीन का आकर्षण बढ़ाएं।</string>
+    <string name="next">अगला</string>
+    <string name="transparent_wallpaper">पारदर्शी वॉलपेपर</string>
+    <string name="Rate">दर</string>
+    <string name="Share">शेयर करना</string>
+    <string name="Feedback">प्रतिक्रिया</string>
+    <string name="Policy">नीति</string>
+    <string name="Explore">अन्वेषण करना</string>
+    <string name="lock_screen">लॉक स्क्रीन</string>
+    <string name="home_screen">होम स्क्रीन</string>
+    <string name="both">दोनों</string>
+    <string name="lock_screen_wallpaper_set_successfully">लॉक स्क्रीन वॉलपेपर सफलतापूर्वक सेट हो गया</string>
+    <string name="done">हो गया</string>
+    <string name="hd_wallpapers">एचडी वॉलपेपर</string>
+    <string name="set_wallpapers">वॉलपेपर सेट करें</string>
+    <string name="swipe_to_see_more">और अधिक देखने के लिए स्वाइप करें</string>
+    <string name="set_wallpaper">वॉलपेपर सेट करो</string>
+    <string name="typing_wallpaper">टाइपिंग वॉलपेपर</string>
+    <string name="mirror_wallpaper">दर्पण वॉलपेपर</string>
+    <string name="select_option">विकल्प चुनें</string>
+    <string name="ok">ठीक है</string>
+    <string name="please_select_screen">कृपया स्क्रीन चुनें</string>
+    <string name="how_is_your_experience">आपका अनुभव कैसा है</string>
+    <string name="your_opinion_means_to_us">आपकी राय हमारे लिए मायने रखती है</string>
+</resources>

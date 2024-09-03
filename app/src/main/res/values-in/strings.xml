@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="first_fragment_label">Fragmen Pertama</string>
+    <string name="second_fragment_label">Fragmen Kedua</string>
+    <string name="previous">Sebelumnya</string>
+    <string name="hello_blank_fragment">Halo fragmen kosong</string>
+    <string name="language">Bahasa</string>
+    <string name="this_action_may_contain_advertising">Tindakan ini mungkin mengandung iklan</string>
+    <string name="transparency">Transparansi</string>
+    <string name="reveal_your_screens_beauty">Ungkapkan keindahan layar Anda dengan Wallpaper Transparan.</string>
+    <string name="crystal">Kristal</string>
+    <string name="clarity_and_style">Kejernihan dan gaya bertemu dalam Wallpaper Transparan.</string>
+    <string name="clearvision">Penglihatan Jelas</string>
+    <string name="elevate_your_screens_allure">Tingkatkan daya tarik layar Anda dengan Wallpaper Transparan.</string>
+    <string name="next">Berikutnya</string>
+    <string name="transparent_wallpaper">Wallpaper Transparan</string>
+    <string name="Rate">Nilai</string>
+    <string name="Share">Bagikan</string>
+    <string name="Feedback">Umpan Balik</string>
+    <string name="Policy">Kebijakan</string>
+    <string name="Explore">Jelajahi</string>
+    <string name="lock_screen">Layar Kunci</string>
+    <string name="home_screen">Layar Utama</string>
+    <string name="both">Keduanya</string>
+    <string name="lock_screen_wallpaper_set_successfully">Wallpaper layar kunci berhasil diatur</string>
+    <string name="done">Selesai</string>
+    <string name="hd_wallpapers">Wallpaper HD</string>
+    <string name="set_wallpapers">Tetapkan Wallpaper</string>
+    <string name="swipe_to_see_more">Geser untuk melihat lebih banyak</string>
+    <string name="set_wallpaper">Tetapkan Wallpaper</string>
+    <string name="typing_wallpaper">Wallpaper Mengetik</string>
+    <string name="mirror_wallpaper">Wallpaper Cermin</string>
+    <string name="select_option">PILIH OPSI</string>
+    <string name="ok">Oke</string>
+    <string name="please_select_screen">Silakan pilih layar</string>
+    <string name="how_is_your_experience">Bagaimana pengalaman Anda?</string>
+    <string name="your_opinion_means_to_us">Opini Anda sangat berarti bagi kami</string>
+
+</resources>

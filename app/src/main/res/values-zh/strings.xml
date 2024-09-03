@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="first_fragment_label">第一个片段</string>
+    <string name="second_fragment_label">第二个片段</string>
+    <string name="previous">上一个</string>
+    <string name="hello_blank_fragment">你好空白片段</string>
+    <string name="language">语言</string>
+    <string name="this_action_may_contain_advertising">此操作可能包含广告</string>
+    <string name="transparency">透明度</string>
+    <string name="reveal_your_screens_beauty">用透明壁纸揭示您的屏幕之美。</string>
+    <string name="crystal">水晶</string>
+    <string name="clarity_and_style">透明壁纸中的清晰度与风格。</string>
+    <string name="clearvision">清晰视觉</string>
+    <string name="elevate_your_screens_allure">用透明壁纸提升您的屏幕魅力。</string>
+    <string name="next">下一个</string>
+    <string name="transparent_wallpaper">透明壁纸</string>
+    <string name="Rate">评价</string>
+    <string name="Share">分享</string>
+    <string name="Feedback">反馈</string>
+    <string name="Policy">政策</string>
+    <string name="Explore">探索</string>
+    <string name="lock_screen">锁屏</string>
+    <string name="home_screen">主屏幕</string>
+    <string name="both">两者</string>
+    <string name="lock_screen_wallpaper_set_successfully">锁屏壁纸已成功设置</string>
+    <string name="done">完成</string>
+    <string name="hd_wallpapers">高清壁纸</string>
+    <string name="set_wallpapers">设置壁纸</string>
+    <string name="swipe_to_see_more">滑动查看更多</string>
+    <string name="set_wallpaper">设置壁纸</string>
+    <string name="typing_wallpaper">打字壁纸</string>
+    <string name="mirror_wallpaper">镜子壁纸</string>
+    <string name="select_option">选择选项</string>
+    <string name="ok">确定</string>
+    <string name="please_select_screen">请选择屏幕</string>
+    <string name="how_is_your_experience">您的体验如何</string>
+    <string name="your_opinion_means_to_us">您的意见对我们很重要</string>
+
+</resources>
