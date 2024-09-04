@@ -3,7 +3,6 @@
     <string name="first_fragment_label">पहला टुकड़ा</string>
     <string name="second_fragment_label">दूसरा टुकड़ा</string>
     <string name="previous">पहले का</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">नमस्कार रिक्त अंश</string>
     <string name="language">भाषा</string>
     <string name="this_action_may_contain_advertising">इस कार्रवाई में विज्ञापन शामिल हो सकता है</string>
@@ -14,7 +13,7 @@
     <string name="clearvision">क्लीयरविज़न</string>
     <string name="elevate_your_screens_allure">पारदर्शी वॉलपेपर के साथ अपनी स्क्रीन का आकर्षण बढ़ाएं।</string>
     <string name="next">अगला</string>
-    <string name="transparent_wallpaper">पारदर्शी वॉलपेपर</string>
+    <string name="transparent_wallpaper">Transparent Wallpaper</string>
     <string name="Rate">दर</string>
     <string name="Share">शेयर करना</string>
     <string name="Feedback">प्रतिक्रिया</string>

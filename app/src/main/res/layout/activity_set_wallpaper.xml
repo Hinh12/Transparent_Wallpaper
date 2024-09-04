@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="#101828"
     tools:context=".Screen.SetWallpaper.SetWallpaperActivity">
 
@@ -24,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16sp"
             android:layout_marginRight="16sp"
+            android:layout_marginTop="30dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -56,8 +56,8 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpage2SetWallpaper"
             android:layout_width="match_parent"
-            android:layout_height="438dp"
-
+            android:layout_height="388dp"
+            android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cst_Title"/>
@@ -82,7 +82,7 @@
             android:text="@string/swipe_to_see_more"
             android:textAlignment="center"
             android:textColor="#ffffff"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@+id/custom_dots_indicator" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -90,12 +90,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:padding="14dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
             android:background="@drawable/custom_button_set_wallpaper"
             android:fontFamily="@font/plusjakartasans_bold"
             android:text="@string/set_wallpaper"
             android:textColor="#ffffff"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

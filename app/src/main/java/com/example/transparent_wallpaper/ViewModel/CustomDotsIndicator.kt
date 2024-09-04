@@ -6,6 +6,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.example.transparent_wallpaper.R
+import android.animation.ObjectAnimator
+import android.view.animation.LinearInterpolator
 
 class CustomDotsIndicator(
     private val dotsLayout: LinearLayout,
@@ -61,12 +63,22 @@ class CustomDotsIndicator(
         }
 
         for (i in dots.indices) {
-            dots[i].setImageDrawable(
+            val dot = dots[i]
+            dot.setImageDrawable(
                 ContextCompat.getDrawable(
                     context,
                     if (i == position) R.drawable.dot_selected else R.drawable.dot_unselected
                 )
             )
+            // Apply scaling animation
+            val scaleXAnimator = ObjectAnimator.ofFloat(dot, "scaleX", if (i == position) 1.5f else 1f)
+            val scaleYAnimator = ObjectAnimator.ofFloat(dot, "scaleY", if (i == position) 1.5f else 1f)
+            scaleXAnimator.duration = 300
+            scaleYAnimator.duration = 300
+            scaleXAnimator.interpolator = LinearInterpolator()
+            scaleYAnimator.interpolator = LinearInterpolator()
+            scaleXAnimator.start()
+            scaleYAnimator.start()
         }
     }
 }

@@ -2,6 +2,7 @@ package com.example.transparent_wallpaper.Screen.Language
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.transparent_wallpaper.Base.BaseActivity
 import com.example.transparent_wallpaper.Model.LanguageModel
 import com.example.transparent_wallpaper.R
-import com.example.transparent_wallpaper.Screen.Home.HomeActivity
 import com.example.transparent_wallpaper.Screen.Intro.Intro1Activity
 import com.example.transparent_wallpaper.Utils.SystemUtils
 import com.example.transparent_wallpaper.ViewModel.LanguageViewModel
@@ -57,11 +57,12 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding,LanguageViewModel>
             val selectedLanguage = viewModel.selectedLanguage.value
             if (selectedLanguage != null) {
                 viewModel.setLocale(this, selectedLanguage.code)
-                saveLanguage(selectedLanguage.code)
+                SystemUtils.saveLocale(this, selectedLanguage.code)
+
                 startActivity(Intent(this, Intro1Activity::class.java))
                 finish()
             } else {
-                Toast.makeText(this, "Please select a language", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Please select a language", Toast.LENGTH_SHORT).show()
             }
         }
 

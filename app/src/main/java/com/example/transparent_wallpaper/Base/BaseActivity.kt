@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.SystemClock
 import android.view.View
 import android.view.Window
 import android.view.WindowInsets
@@ -14,6 +15,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
+import com.example.transparent_wallpaper.Utils.SystemUtils
 
 abstract class BaseActivity<VB : ViewBinding, V : ViewModel> : AppCompatActivity() {
     protected lateinit var binding: VB
@@ -30,6 +32,7 @@ abstract class BaseActivity<VB : ViewBinding, V : ViewModel> : AppCompatActivity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        SystemUtils.setLocale(this)
         binding = createBinding()
         setContentView(binding.root)
         binding.root.setBackgroundColor(Color.WHITE)

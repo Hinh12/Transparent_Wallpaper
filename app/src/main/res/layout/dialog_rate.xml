@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="10sp"
-    android:background="@drawable/custom_vien_anh"
+    android:background="@drawable/custom__dialog_select_option"
     >
 
 

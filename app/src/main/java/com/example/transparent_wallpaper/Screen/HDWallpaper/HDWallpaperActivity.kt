@@ -42,7 +42,7 @@ class HDWallpaperActivity : BaseActivity<ActivityHdwallpaperBinding, BaseViewMod
 
         list = listOf(
             HdWallpaperModel(1, R.drawable.img_content_1),
-            HdWallpaperModel(2, R.drawable.img_content_4),
+            HdWallpaperModel(2, R.drawable.img_content_04),
             HdWallpaperModel(3, R.drawable.img_content_2),
             HdWallpaperModel(4, R.drawable.img_content_5),
             HdWallpaperModel(5, R.drawable.img_content_3),

@@ -50,17 +50,7 @@ object SystemUtils {
         }
     }
 
-    fun setActive(context: Context, value: Boolean) {
-        val sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putBoolean("active", value)
-        editor.apply()
-    }
 
-    fun getActive(context: Context, value: Boolean): Boolean {
-        val sharedPreferences = context.getSharedPreferences("data", Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean("active", value)
-    }
 
     // Lưu ngôn ngữ gốc của thiết bị
     fun saveDeviceLanguage(context: Context, languageCode: String) {

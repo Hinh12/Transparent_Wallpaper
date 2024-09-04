@@ -69,6 +69,10 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
         binding.viewpage2SetWallpaper.adapter = adapter
 
         // Set up dots indicator
+//        val customDotsIndicator = CustomDotsIndicator(binding.customDotsIndicator, list.size, this)
+//        customDotsIndicator.updateDots(0)
+
+        // Khởi tạo và sử dụng CustomDotsIndicator
         val customDotsIndicator = CustomDotsIndicator(binding.customDotsIndicator, list.size, this)
         customDotsIndicator.updateDots(0)
         binding.viewpage2SetWallpaper.registerOnPageChangeCallback(object :

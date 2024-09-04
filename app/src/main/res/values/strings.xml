@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name" translatable="false">Transparent_Wallpaper</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="previous">Previous</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="language">Language</string>
     <string name="this_action_may_contain_advertising">This action may contain advertising</string>

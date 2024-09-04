@@ -46,9 +46,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
 
-        window.decorView.systemUiVisibility = (
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                )
 
         sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
         // Kiểm tra nếu người dùng đã đánh giá, ẩn biểu tượng Rate
@@ -83,10 +80,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
                 Color.parseColor("#9B4EA8"),
                 Color.parseColor("#AB538D"),
                 Color.parseColor("#C45963"),
-                Color.parseColor("#885F42"),
+                Color.parseColor("#FF6900"),
                 Color.parseColor("#FF6900"),
             ), null, Shader.TileMode.CLAMP
         )
+
         tpToolbar.paint.shader = textShader
 
 
@@ -124,14 +122,43 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
             }
         }
 
+        var check = false
+
         // Mở menu khi bấm vào nút
         val exploreImageView: ImageView = findViewById(R.id.img_menu)
         exploreImageView.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
+            if (!check) {
+                drawerLayout.openDrawer(GravityCompat.START)
+                check = true
+            }
         }
 
+        drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+
+            }
+
+            override fun onDrawerOpened(drawerView: View) {
+
+            }
+
+            override fun onDrawerClosed(drawerView: android.view.View) {
+                check = false
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+
+            }
+
+        })
+
+
+
         hdWallPaper.setOnClickListener {
-            navigateTo(HDWallpaperActivity::class.java)
+            if (!check) {
+                navigateTo(HDWallpaperActivity::class.java)
+                check = true
+            }
         }
     }
 
@@ -286,5 +313,15 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     private fun navigateTo(targetClass: Class<*>) {
         val intent = Intent(this, targetClass)
         startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        check = false
     }
 }

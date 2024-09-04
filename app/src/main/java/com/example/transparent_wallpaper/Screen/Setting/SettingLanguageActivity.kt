@@ -14,7 +14,9 @@ import com.example.transparent_wallpaper.Screen.Language.AdapterLanguage
 import com.example.transparent_wallpaper.Utils.SystemUtils
 import com.example.transparent_wallpaper.ViewModel.LanguageViewModel
 import com.example.transparent_wallpaper.databinding.ActivitySettingLanguageBinding
+import com.example.transparent_wallpaper.view.findActivity
 import com.example.transparent_wallpaper.view.tap
+import java.util.Locale
 
 class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, LanguageViewModel>() {
 
@@ -23,21 +25,18 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
 
     override fun setViewModel() = LanguageViewModel()
 
-
     private lateinit var adapter: AdapterLanguage
 
     override fun initView() {
         super.initView()
-
         viewModel = LanguageViewModel()
+        restoreLocale()
 
         adapter = AdapterLanguage(this, mutableListOf()) { language ->
             viewModel.setSelectedLanguage(this, language)
+            updateSaveButtonVisibility(language)
         }
 
-        window.decorView.systemUiVisibility = (
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                )
 
         val rcvLanguageSetting = findViewById<RecyclerView>(R.id.rcvSettingFrag)
         rcvLanguageSetting.layoutManager = LinearLayoutManager(this)
@@ -49,15 +48,11 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
         }
 
 
-        viewModel.selectedLanguage.observe(this) { selectedLanguage ->
-            adapter.setSelectedLanguage(selectedLanguage)
-            updateSaveButtonVisibility(selectedLanguage)
-        }
 
-        viewModel.languageStart(this)
+        viewModel.languageSetting(this)
 
         binding.imgbtnback.setOnClickListener {
-            navigateTo(HomeActivity::class.java)
+            finish()
         }
 
 
@@ -66,17 +61,19 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
             val selectedLanguage = viewModel.selectedLanguage.value
             if (selectedLanguage != null) {
                 viewModel.setLocale(this, selectedLanguage.code)
-                //SystemUtils.saveLocale(this, selectedLanguage.code)
-                saveLanguage(selectedLanguage.code)
+                SystemUtils.saveLocale(this, selectedLanguage.code)
 
                 startActivity(Intent(this, HomeActivity::class.java))
                 finish()
             } else {
-                Toast.makeText(this, "Please select a language", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Please select a language", Toast.LENGTH_SHORT).show()
             }
         }
 
     }
+
+
+
 
     private fun loadSelectedLanguage() {
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
@@ -86,6 +83,16 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
                 viewModel.setSelectedLanguage(this, language)
             }
         }
+    }
+
+    private fun restoreLocale() {
+        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+        val languageCode = sharedPreferences.getString("selected_language", "en")
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 
     private fun saveLanguage(languageCode: String) {
@@ -104,9 +111,7 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
         }
     }
 
-    private fun navigateTo(targetClass: Class<*>) {
-        val intent = Intent(this, targetClass)
-        startActivity(intent)
-    }
+
+
 
 }

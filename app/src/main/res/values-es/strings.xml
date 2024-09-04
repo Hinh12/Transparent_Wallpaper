@@ -3,7 +3,6 @@
     <string name="first_fragment_label">Primer fragmento</string>
     <string name="second_fragment_label">Segundo fragmento</string>
     <string name="previous">Anterior</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hola fragmento en blanco</string>
     <string name="language">Idioma</string>
     <string name="this_action_may_contain_advertising">Esta acción puede contener publicidad.</string>
@@ -14,7 +13,7 @@
     <string name="clearvision">visión clara</string>
     <string name="elevate_your_screens_allure">Eleva el atractivo de tu pantalla con el fondo de pantalla transparente.</string>
     <string name="next">Próximo</string>
-    <string name="transparent_wallpaper">Fondo de pantalla transparente</string>
+    <string name="transparent_wallpaper">Transparent Wallpaper</string>
     <string name="Rate">Tasa</string>
     <string name="Share">Compartir</string>
     <string name="Feedback">Comentario</string>

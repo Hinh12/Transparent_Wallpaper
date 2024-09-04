@@ -15,20 +15,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/img_bg_phu"
-            android:layout_marginTop="50dp"
             android:orientation="vertical">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16sp"
                 android:orientation="horizontal"
+                android:layout_marginTop="30dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/imgbtnback"
-                    android:layout_width="wrap_content"
+                    android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_back"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -39,7 +39,6 @@
                     android:id="@+id/btnsettingback"
                     android:layout_width="wrap_content"
                     android:layout_height="40sp"
-                    android:layout_margin="10sp"
                     android:fontFamily="@font/angkor_regular"
                     android:gravity="center_vertical"
                     android:padding="2sp"
@@ -49,14 +48,14 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-
                     />
 
                 <ImageView
                     android:id="@+id/imgbtnsettingSaveLanguage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/ic_check"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -65,6 +64,7 @@
                 android:id="@+id/rcvSettingFrag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 tools:listitem="@layout/item_languagescreen" />
 
 
