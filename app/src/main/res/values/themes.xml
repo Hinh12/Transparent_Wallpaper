@@ -1,9 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Transparent_Wallpaper" parent="Theme.Material3.Light.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="dialogTheme">@android:color/transparent</item>
+        <item name="alertDialogTheme">@android:color/transparent</item>
+        <item name="alertDialogStyle">@android:color/transparent</item>
     </style>
 
     <style name="Theme.Transparent_Wallpaper" parent="Base.Theme.Transparent_Wallpaper" />
+
+    <style name="BaseDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/background_light</item>
+    </style>
 </resources>

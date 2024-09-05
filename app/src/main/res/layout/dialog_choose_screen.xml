@@ -4,10 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/cstSelect"
-    android:layout_gravity="center"
-    android:layout_marginHorizontal="22dp"
-    android:background="@drawable/custom_dialog_option"
-    >
+    android:layout_gravity="center">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="12dp"
+        android:background="@drawable/custom_dialog_option">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -160,4 +162,6 @@
             android:textAllCaps="false"
             android:textColor="#ffffff" />
     </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
