@@ -92,16 +92,14 @@
 
                         <TextView
                             android:id="@+id/textOverlay"
-                            android:layout_width="wrap_content"
+                            android:layout_width="120sp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
-                            android:background="@android:color/transparent"
                             android:fontFamily="@font/plusjakartasans_bold"
                             android:lineSpacingExtra="10dp"
-                            android:breakStrategy="simple"
-                            android:text="@string/transparent_wallpaper"
+                            android:text="@string/transparent_wallpaper_home"
                             android:textAlignment="center"
-                            android:textColor="@android:color/white"
+                            android:textColor="@color/white"
                             android:textSize="20sp" />
 
                         <androidx.appcompat.widget.AppCompatButton
@@ -167,7 +165,7 @@
                                     android:text="@string/typing_wallpaper"
                                     android:textAlignment="center"
                                     android:textColor="@color/white"
-                                    android:textSize="17sp" />
+                                    android:textSize="16sp" />
                             </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -220,7 +218,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/plusjakartasans_medium"
                                     android:text="@string/mirror_wallpaper"
-                                    android:textSize="17sp"
+                                    android:textSize="16sp"
                                     android:textAlignment="center"
                                     android:textColor="@color/white" />
                             </LinearLayout>
@@ -261,7 +259,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/plusjakartasans_medium"
                                     android:text="@string/hd_wallpapers"
-                                    android:textSize="17sp"
+                                    android:textSize="16sp"
                                     android:textAlignment="center"
                                     android:textColor="@color/white" />
                             </LinearLayout>

@@ -27,19 +27,23 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding,LanguageViewModel>
 
     override fun initView() {
         super.initView()
-        setContentView(R.layout.activity_language)
+
         restoreLocale()
         viewModel = LanguageViewModel()
 
 
         adapter = AdapterLanguage(this, mutableListOf()) { language ->
             viewModel.setSelectedLanguage(this, language)
+            updateSaveButtonVisibility(language)
         }
 
         val rcvLanguageStart = findViewById<RecyclerView>(R.id.rcvFrag)
         rcvLanguageStart.layoutManager = LinearLayoutManager(this)
         rcvLanguageStart.adapter = adapter
 
+
+        // Mặc định ẩn nút imgbtnSaveLanguage khi khởi tạo
+        binding.imgbtnSaveLanguage.visibility = View.GONE
 
         viewModel.languages.observe(this) { languages ->
             adapter.updateData(languages)
@@ -52,8 +56,8 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding,LanguageViewModel>
 
         viewModel.languageStart(this)
 
-        val imgSave = findViewById<View>(R.id.imgbtnSaveLanguage)
-        imgSave.tap {
+        //val imgSave = findViewById<View>(R.id.imgbtnSaveLanguage)
+        binding.imgbtnSaveLanguage.tap {
             val selectedLanguage = viewModel.selectedLanguage.value
             if (selectedLanguage != null) {
                 viewModel.setLocale(this, selectedLanguage.code)
@@ -81,6 +85,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding,LanguageViewModel>
     }
 
     private fun updateSaveButtonVisibility(selectedLanguage: LanguageModel?) {
+
         binding.imgbtnSaveLanguage.visibility = if (selectedLanguage != null) {
             View.VISIBLE
         } else {

@@ -1,7 +1,6 @@
 package com.example.transparent_wallpaper.Screen.Home
 
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -20,14 +19,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.transparent_wallpaper.Base.BaseActivity
+import com.example.transparent_wallpaper.Model.Rate
 import com.example.transparent_wallpaper.R
 import com.example.transparent_wallpaper.Screen.HDWallpaper.HDWallpaperActivity
+import com.example.transparent_wallpaper.Screen.Language.LanguageActivity
 import com.example.transparent_wallpaper.Screen.Setting.SettingLanguageActivity
 import com.example.transparent_wallpaper.ViewModel.HomeViewModel
 import com.example.transparent_wallpaper.databinding.ActivityHomeBinding
 import com.google.android.material.navigation.NavigationView
-import com.example.transparent_wallpaper.Model.Rate
-import com.example.transparent_wallpaper.Utils.SharePrefRemote
 import com.google.android.play.core.review.ReviewManagerFactory
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
@@ -46,9 +45,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
 
-
         sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
-        // Kiểm tra nếu người dùng đã đánh giá, ẩn biểu tượng Rate
         if (sharedPreferences.getBoolean("isRated", false)) {
             hideRateMenuItem()
         }
@@ -57,12 +54,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
         val tpToolbar = findViewById<TextView>(R.id.txtToolBar)
         val txtVersion = findViewById<TextView>(R.id.txtVersion)
         val hdWallPaper = findViewById<FrameLayout>(R.id.hdWallPaper)
-
-
-        val textView: TextView = findViewById(R.id.textOverlay)
-        val originalText = getString(R.string.transparent_wallpaper)
-        val spacedText = originalText.replace(" ", "\n")
-        textView.text = spacedText
 
         txtVersion.text = "Version: 1.2.1"
 
@@ -87,50 +78,36 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
 
         tpToolbar.paint.shader = textShader
 
-
         // Xử lý sự kiện menu
-        navView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.nav_language -> {
-                    val intent = Intent(this, SettingLanguageActivity::class.java)
-                    startActivity(intent)
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    true
-                }
+        navView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item: MenuItem ->
+            if (item.itemId == R.id.nav_language && !check) {
+                check = true
+                navigateTo(SettingLanguageActivity::class.java)
+            } else if (item.itemId == R.id.nav_rate && !check) {
+                check = true
+                showRateDialog()
+            } else if (item.itemId == R.id.nav_share && !check) {
+                check = true
+                share()
+            } else if (item.itemId == R.id.nav_feedback) {
 
-                R.id.nav_rate -> {
-                    showRateDialog()
-                    true
-                }
-
-                R.id.nav_share -> {
-                    share()
-                    true
-                }
-
-                R.id.nav_feedback -> {
-                    // Xử lý chọn Feedback
-                    true
-                }
-
-                R.id.nav_policy -> {
-                    openPrivacyPolicy()
-                    true
-                }
-
-                else -> false
+            } else if (item.itemId == R.id.nav_policy && !check) {
+                check = true
+                openPrivacyPolicy()
             }
-        }
+            binding.txtVersion.text = "Version: 1.2.1"
+            binding.txtVersion.visibility = View.VISIBLE
+            binding.drawerLayoutHome.closeDrawer(GravityCompat.START)
+            false
+        })
 
-        var check = false
 
         // Mở menu khi bấm vào nút
         val exploreImageView: ImageView = findViewById(R.id.img_menu)
         exploreImageView.setOnClickListener {
-            if (!check) {
-                drawerLayout.openDrawer(GravityCompat.START)
-                check = true
-            }
+            drawerLayout.openDrawer(GravityCompat.START)
+
+
         }
 
         drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
@@ -189,7 +166,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     }
 
     private fun showRateDialog() {
-        if (check) return
         check = true
 
         val ratingDialog = RatingDialog(this)

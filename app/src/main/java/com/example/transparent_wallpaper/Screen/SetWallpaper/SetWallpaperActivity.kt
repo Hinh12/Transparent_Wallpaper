@@ -1,6 +1,7 @@
 package com.example.transparent_wallpaper.Screen.SetWallpaper
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.app.WallpaperManager
 import android.content.Intent
 import android.graphics.Color
@@ -8,10 +9,14 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -40,10 +45,10 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
 
     override fun viewModel() {}
 
-    override fun initView() {
-        super.initView()
-        //setContentView(R.layout.activity_set_wallpaper)
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_set_wallpaper)
 
         binding = ActivitySetWallpaperBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -61,27 +66,12 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
             HdWallpaperModel(10, R.drawable.img_content_3)
         )
 
-        binding.imgBackT.setOnClickListener {
-            navigateTo(HDWallpaperActivity::class.java)
-        }
-
         val adapter = SetWallViewPager2Adapter(list, binding.viewpage2SetWallpaper)
         binding.viewpage2SetWallpaper.adapter = adapter
-
-        // Set up dots indicator
-//        val customDotsIndicator = CustomDotsIndicator(binding.customDotsIndicator, list.size, this)
-//        customDotsIndicator.updateDots(0)
 
         // Khởi tạo và sử dụng CustomDotsIndicator
         val customDotsIndicator = CustomDotsIndicator(binding.customDotsIndicator, list.size, this)
         customDotsIndicator.updateDots(0)
-        binding.viewpage2SetWallpaper.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                customDotsIndicator.updateDots(position)
-            }
-        })
 
         val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
         val offsetPx = resources.getDimensionPixelOffset(R.dimen.offset)
@@ -101,8 +91,7 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
         binding.viewpage2SetWallpaper.offscreenPageLimit = 3
         binding.viewpage2SetWallpaper.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
 
-
-// Set the current item based on the intent extra
+        // Set the current item based on the intent extra
         val position = intent.getIntExtra("position", 0)
         binding.viewpage2SetWallpaper.setCurrentItem(position)
 
@@ -130,10 +119,19 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
             binding.viewpage2SetWallpaper.setCurrentItem(position, false)
         } ?: run {
             // Xử lý nếu không tìm thấy ảnh phù hợp
-//            Toast.makeText(this, "Không tìm thấy ảnh phù hợp", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Không tìm thấy ảnh phù hợp", Toast.LENGTH_SHORT).show()
         }
 
+        // Cập nhật dot khi trang thay đổi
+        binding.viewpage2SetWallpaper.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                customDotsIndicator.updateDots(position)
+            }
+        })
     }
+
 
     private fun navigateTo(targetClass: Class<*>) {
         val intent = Intent(this, targetClass)
@@ -147,13 +145,22 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
     }
 
 
-
-
     private fun showDialogChoose() {
         val dialogChooseScreenBinding = DialogChooseScreenBinding.inflate(layoutInflater)
-        val builder = AlertDialog.Builder(this)
-            .setView(dialogChooseScreenBinding.root)
-        val dialog = builder.create() // Create and store AlertDialog into variable
+        val builder = Dialog(this)
+        builder.setContentView(dialogChooseScreenBinding.root)
+         // Create and store AlertDialog into variable
+
+        val dialog = Dialog(this)
+        dialog.setCancelable(true)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_choose_screen)
+        val window = dialog.window
+        window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
@@ -194,11 +201,6 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
                                 true,
                                 WallpaperManager.FLAG_LOCK
                             )
-//                            Toast.makeText(
-//                                this@SetWallpaperActivity,
-//                                R.string.lock_screen_wallpaper_set_successfully,
-//                                Toast.LENGTH_SHORT
-//                            ).show()
                             startActivity(
                                 Intent(
                                     this@SetWallpaperActivity,
@@ -206,21 +208,12 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
                                 )
                             )
                         } else {
-//                            Toast.makeText(
-//                                this@SetWallpaperActivity,
-//                                "Setting lock screen wallpaper requires Android 7.0 or higher",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
+
                         }
                     }
 
                     dialogChooseScreenBinding.imgradioHomeScreen.visibility == View.VISIBLE -> {
                         wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_SYSTEM)
-//                        Toast.makeText(
-//                            this@SetWallpaperActivity,
-//                            "Home screen wallpaper set successfully",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
                         startActivity(
                             Intent(
                                 this@SetWallpaperActivity,
@@ -235,14 +228,13 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
 
                         // Đặt hình nền cho màn hình khóa nếu có hỗ trợ
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_LOCK)
+                            wallpaperManager.setBitmap(
+                                bitmap,
+                                null,
+                                true,
+                                WallpaperManager.FLAG_LOCK
+                            )
                         }
-
-//                        Toast.makeText(
-//                            this@SetWallpaperActivity,
-//                            "Both home and lock screen wallpapers set successfully",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
                         startActivity(
                             Intent(
                                 this@SetWallpaperActivity,
@@ -252,20 +244,10 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
                     }
 
                     else -> {
-//                        Toast.makeText(
-//                            this@SetWallpaperActivity,
-//                            "Please select screen",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
                     }
                 }
                 dialog.dismiss() // Close dialog after processing
             } catch (e: IOException) {
-//                Toast.makeText(
-//                    this@SetWallpaperActivity,
-//                    "Failed to set wallpaper",
-//                    Toast.LENGTH_SHORT
-//                ).show()
             }
         }
     }
