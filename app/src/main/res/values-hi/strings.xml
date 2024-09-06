@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="version">संस्करण: 1.2.1</string>
+    <string name="successfully">सफलतापूर्वक!</string>
     <string name="first_fragment_label">पहला टुकड़ा</string>
     <string name="second_fragment_label">दूसरा टुकड़ा</string>
     <string name="previous">पहले का</string>

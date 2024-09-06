@@ -20,6 +20,9 @@
         android:theme="@style/Theme.Transparent_Wallpaper"
         tools:targetApi="31">
         <activity
+            android:name=".MyApplication"
+            android:exported="false" />
+        <activity
             android:name=".Screen.HDWallpaper.SuccessActivity"
             android:exported="false" />
         <activity
@@ -51,9 +54,12 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
     </application>
 
 </manifest>

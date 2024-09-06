@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="version">Version: 1.2.1</string>
+    <string name="successfully">Erfolgreich!</string>
     <string name="first_fragment_label">Erstes Fragment</string>
     <string name="second_fragment_label">Zweites Fragment</string>
     <string name="previous">Vorherige</string>

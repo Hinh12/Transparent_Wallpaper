@@ -52,10 +52,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
         drawerLayout = findViewById(R.id.drawer_layout_home)
         val navView: NavigationView = findViewById(R.id.nav)
         val tpToolbar = findViewById<TextView>(R.id.txtToolBar)
-        val txtVersion = findViewById<TextView>(R.id.txtVersion)
         val hdWallPaper = findViewById<FrameLayout>(R.id.hdWallPaper)
 
-        txtVersion.text = "Version: 1.2.1"
 
         // Set màu gradient cho text trên toolbar
         tpToolbar.setTextColor(Color.WHITE)
@@ -95,8 +93,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
                 check = true
                 openPrivacyPolicy()
             }
-            binding.txtVersion.text = "Version: 1.2.1"
-            binding.txtVersion.visibility = View.VISIBLE
+
             binding.drawerLayoutHome.closeDrawer(GravityCompat.START)
             false
         })

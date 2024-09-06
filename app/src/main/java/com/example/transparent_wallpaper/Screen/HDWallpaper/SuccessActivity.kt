@@ -10,14 +10,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.example.transparent_wallpaper.Base.BaseActivity
+import com.example.transparent_wallpaper.Base.BaseViewModel
 import com.example.transparent_wallpaper.R
 import com.example.transparent_wallpaper.Screen.Home.HomeActivity
+import com.example.transparent_wallpaper.databinding.ActivitySuccessBinding
 
-class SuccessActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_success)
+class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
+    override fun createBinding() = ActivitySuccessBinding.inflate(layoutInflater)
+
+    override fun setViewModel() = BaseViewModel()
+    override fun initView() {
+        super.initView()
         val btnDone = findViewById<Button>(R.id.btn_done);
 
         // Ẩn thanh điều hướng
@@ -37,7 +41,6 @@ class SuccessActivity : AppCompatActivity() {
 
         }
 
-
         btnDone.setOnClickListener {
             startActivity(
                 Intent(
@@ -46,5 +49,8 @@ class SuccessActivity : AppCompatActivity() {
                 )
             )
         }
+
     }
+
+
 }

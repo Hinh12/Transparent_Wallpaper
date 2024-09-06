@@ -292,6 +292,7 @@
                 android:id="@+id/txtVersion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/version"
                 android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginBottom="64dp"
                 app:layout_constraintStart_toStartOf="parent"

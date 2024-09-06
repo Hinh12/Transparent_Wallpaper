@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="version">Versi: 1.2.1</string>
+    <string name="successfully">Berhasil!</string>
     <string name="first_fragment_label">Fragmen Pertama</string>
     <string name="second_fragment_label">Fragmen Kedua</string>
     <string name="previous">Sebelumnya</string>

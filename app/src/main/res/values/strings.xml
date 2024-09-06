@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Transparent_Wallpaper</string>
+    <string name="version">Version: 1.2.1</string>
+    <string name="successfully">Successfully!</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="previous">Previous</string>
