@@ -24,8 +24,6 @@
             android:layout_marginLeft="16sp"
             android:layout_marginRight="16sp"
             android:layout_marginTop="30dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -33,22 +31,32 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_back"
+                android:layout_marginRight="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvTitle_hdwallpaper"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvTitle_sethdwallpaper"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|center_horizontal"
                 android:fontFamily="@font/angkor_regular"
                 android:text="@string/set_wallpapers"
+                android:layout_marginRight="40dp"
                 android:textColor="#ffffff"
                 android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginLeft="40dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:scrollHorizontally="true"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

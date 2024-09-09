@@ -100,14 +100,20 @@
                             android:text="@string/transparent_wallpaper_home"
                             android:textAlignment="center"
                             android:textColor="@color/white"
-                            android:textSize="20sp" />
+                            android:textSize="18sp"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:singleLine="true"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:scrollHorizontally="true"/>
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/buttonOverlay"
                             android:layout_width="wrap_content"
                             android:layout_height="30dp"
                             android:layout_gravity="center"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="10dp"
                             android:paddingEnd="15dp"
                             android:paddingStart="15dp"
                             android:paddingBottom="3dp"
@@ -159,13 +165,21 @@
                                     android:src="@drawable/ic_message" />
 
                                 <TextView
+                                    android:id="@+id/text_typing"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/plusjakartasans_medium"
                                     android:text="@string/typing_wallpaper"
                                     android:textAlignment="center"
                                     android:textColor="@color/white"
-                                    android:textSize="16sp" />
+                                    android:textSize="16sp"
+                                    android:padding="2dp"
+                                    android:ellipsize="marquee"
+                                    android:marqueeRepeatLimit="marquee_forever"
+                                    android:singleLine="true"
+                                    android:focusable="true"
+                                    android:focusableInTouchMode="true"
+                                    android:scrollHorizontally="true" />
                             </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -214,13 +228,21 @@
                                     android:src="@drawable/ic_mirror_wallpapaer" />
 
                                 <TextView
+                                    android:id="@+id/mirror_wallpaper"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/plusjakartasans_medium"
                                     android:text="@string/mirror_wallpaper"
                                     android:textSize="16sp"
+                                    android:padding="2dp"
                                     android:textAlignment="center"
-                                    android:textColor="@color/white" />
+                                    android:textColor="@color/white"
+                                    android:ellipsize="marquee"
+                                    android:marqueeRepeatLimit="marquee_forever"
+                                    android:singleLine="true"
+                                    android:focusable="true"
+                                    android:focusableInTouchMode="true"
+                                    android:scrollHorizontally="true"/>
                             </LinearLayout>
                         </FrameLayout>
 
@@ -255,13 +277,21 @@
                                     android:src="@drawable/ic_hd_walllpaper" />
 
                                 <TextView
+                                    android:id="@+id/text_hdwallpaper"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/plusjakartasans_medium"
                                     android:text="@string/hd_wallpapers"
                                     android:textSize="16sp"
+                                    android:padding="2dp"
                                     android:textAlignment="center"
-                                    android:textColor="@color/white" />
+                                    android:textColor="@color/white"
+                                    android:ellipsize="marquee"
+                                    android:marqueeRepeatLimit="marquee_forever"
+                                    android:singleLine="true"
+                                    android:focusable="true"
+                                    android:focusableInTouchMode="true"
+                                    android:scrollHorizontally="true"/>
                             </LinearLayout>
                         </FrameLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>

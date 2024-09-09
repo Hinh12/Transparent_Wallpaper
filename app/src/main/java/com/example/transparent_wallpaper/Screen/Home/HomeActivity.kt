@@ -53,7 +53,14 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
         val navView: NavigationView = findViewById(R.id.nav)
         val tpToolbar = findViewById<TextView>(R.id.txtToolBar)
         val hdWallPaper = findViewById<FrameLayout>(R.id.hdWallPaper)
-
+        val textOverlay = findViewById<TextView>(R.id.textOverlay)
+        val text_hdwallpaper = findViewById<TextView>(R.id.text_hdwallpaper)
+        val mirror_wallpaper = findViewById<TextView>(R.id.mirror_wallpaper)
+        val text_typing = findViewById<TextView>(R.id.text_typing)
+        textOverlay.isSelected = true
+        mirror_wallpaper.isSelected = true
+        text_hdwallpaper.isSelected = true
+        text_typing.isSelected = true
 
         // Set màu gradient cho text trên toolbar
         tpToolbar.setTextColor(Color.WHITE)

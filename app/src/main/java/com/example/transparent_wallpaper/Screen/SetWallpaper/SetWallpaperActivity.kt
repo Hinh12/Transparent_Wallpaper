@@ -15,6 +15,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.recyclerview.widget.RecyclerView
@@ -46,92 +47,94 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
     override fun viewModel() {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            enableEdgeToEdge()
-            setContentView(R.layout.activity_set_wallpaper)
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_set_wallpaper)
 
-            binding = ActivitySetWallpaperBinding.inflate(layoutInflater)
-            setContentView(binding.root)
+        binding = ActivitySetWallpaperBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-            list = listOf(
-                HdWallpaperModel(1, R.drawable.img_content_1),
-                HdWallpaperModel(2, R.drawable.img_content_4),
-                HdWallpaperModel(3, R.drawable.img_content_2),
-                HdWallpaperModel(4, R.drawable.img_content_5),
-                HdWallpaperModel(5, R.drawable.img_content_3),
-                HdWallpaperModel(6, R.drawable.img_content_6),
-                HdWallpaperModel(7, R.drawable.img_content_5),
-                HdWallpaperModel(8, R.drawable.img_content_4),
-                HdWallpaperModel(9, R.drawable.img_content_2),
-                HdWallpaperModel(10, R.drawable.img_content_3)
-            )
+        val tvTitle_sethdwallpaper = findViewById<TextView>(R.id.tvTitle_sethdwallpaper)
+        tvTitle_sethdwallpaper.isSelected = true
 
-            val adapter = SetWallViewPager2Adapter(list, binding.viewpage2SetWallpaper)
-            binding.viewpage2SetWallpaper.adapter = adapter
+        list = listOf(
+            HdWallpaperModel(1, R.drawable.img_content_1),
+            HdWallpaperModel(2, R.drawable.img_content_4),
+            HdWallpaperModel(3, R.drawable.img_content_2),
+            HdWallpaperModel(4, R.drawable.img_content_5),
+            HdWallpaperModel(5, R.drawable.img_content_3),
+            HdWallpaperModel(6, R.drawable.img_content_6),
+            HdWallpaperModel(7, R.drawable.img_content_5),
+            HdWallpaperModel(8, R.drawable.img_content_4),
+            HdWallpaperModel(9, R.drawable.img_content_2),
+            HdWallpaperModel(10, R.drawable.img_content_3)
+        )
 
-            // Khởi tạo và sử dụng CustomDotsIndicator
-            val customDotsIndicator = CustomDotsIndicator(binding.customDotsIndicator, list.size, this)
-            customDotsIndicator.updateDots(0)
+        val adapter = SetWallViewPager2Adapter(list, binding.viewpage2SetWallpaper)
+        binding.viewpage2SetWallpaper.adapter = adapter
 
-            val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
-            val offsetPx = resources.getDimensionPixelOffset(R.dimen.offset)
+        // Khởi tạo và sử dụng CustomDotsIndicator
+        val customDotsIndicator = CustomDotsIndicator(binding.customDotsIndicator, list.size, this)
+        customDotsIndicator.updateDots(0)
 
-            val compositePageTransformer = CompositePageTransformer().apply {
-                addTransformer(MarginPageTransformer(pageMarginPx))
-                addTransformer { page, position ->
-                    val scale = 1 - kotlin.math.abs(position) * 0.1f
-                    page.scaleY = scale
-                }
+        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.pageMargin)
+        val offsetPx = resources.getDimensionPixelOffset(R.dimen.offset)
+
+        val compositePageTransformer = CompositePageTransformer().apply {
+            addTransformer(MarginPageTransformer(pageMarginPx))
+            addTransformer { page, position ->
+                val scale = 1 - kotlin.math.abs(position) * 0.1f
+                page.scaleY = scale
             }
-
-            binding.viewpage2SetWallpaper.setPageTransformer(compositePageTransformer)
-            binding.viewpage2SetWallpaper.setPadding(offsetPx, 0, offsetPx, 0)
-            binding.viewpage2SetWallpaper.clipToPadding = false
-            binding.viewpage2SetWallpaper.clipChildren = false
-            binding.viewpage2SetWallpaper.offscreenPageLimit = 3
-            binding.viewpage2SetWallpaper.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-
-            // Set the current item based on the intent extra
-            val position = intent.getIntExtra("position", 0)
-            binding.viewpage2SetWallpaper.setCurrentItem(position)
-
-            // Set up button click listener
-            binding.btnSetWallpaper.setOnClickListener {
-                showDialogChoose()
-            }
-
-            // Set up back button listener
-            binding.imgBackT.setOnClickListener {
-                startActivity(Intent(this, HDWallpaperActivity::class.java))
-            }
-
-            // Nhận IMAGE_ID từ intent
-            val imageId = intent.getIntExtra("IMAGE_ID", -1)
-
-            // Tìm ảnh trong danh sách dựa trên ID
-            val selectedModel = list.find { it.idImage == imageId }
-
-            selectedModel?.let {
-                // Hiển thị ảnh trong ViewPager2
-                val position = list.indexOf(it)
-                val adapter = SetWallViewPager2Adapter(list, binding.viewpage2SetWallpaper)
-                binding.viewpage2SetWallpaper.adapter = adapter
-                binding.viewpage2SetWallpaper.setCurrentItem(position, false)
-            } ?: run {
-                // Xử lý nếu không tìm thấy ảnh phù hợp
-                Toast.makeText(this, "Không tìm thấy ảnh phù hợp", Toast.LENGTH_SHORT).show()
-            }
-
-            // Cập nhật dot khi trang thay đổi
-            binding.viewpage2SetWallpaper.registerOnPageChangeCallback(object :
-                ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-                    customDotsIndicator.updateDots(position)
-                }
-            })
         }
 
+        binding.viewpage2SetWallpaper.setPageTransformer(compositePageTransformer)
+        binding.viewpage2SetWallpaper.setPadding(offsetPx, 0, offsetPx, 0)
+        binding.viewpage2SetWallpaper.clipToPadding = false
+        binding.viewpage2SetWallpaper.clipChildren = false
+        binding.viewpage2SetWallpaper.offscreenPageLimit = 3
+        binding.viewpage2SetWallpaper.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
+        // Set the current item based on the intent extra
+        val position = intent.getIntExtra("position", 0)
+        binding.viewpage2SetWallpaper.setCurrentItem(position)
+
+        // Set up button click listener
+        binding.btnSetWallpaper.setOnClickListener {
+            showDialogChoose()
+        }
+
+        // Set up back button listener
+        binding.imgBackT.setOnClickListener {
+            startActivity(Intent(this, HDWallpaperActivity::class.java))
+        }
+
+        // Nhận IMAGE_ID từ intent
+        val imageId = intent.getIntExtra("IMAGE_ID", -1)
+
+        // Tìm ảnh trong danh sách dựa trên ID
+        val selectedModel = list.find { it.idImage == imageId }
+
+        selectedModel?.let {
+            // Hiển thị ảnh trong ViewPager2
+            val position = list.indexOf(it)
+            val adapter = SetWallViewPager2Adapter(list, binding.viewpage2SetWallpaper)
+            binding.viewpage2SetWallpaper.adapter = adapter
+            binding.viewpage2SetWallpaper.setCurrentItem(position, false)
+        } ?: run {
+            // Xử lý nếu không tìm thấy ảnh phù hợp
+            Toast.makeText(this, "Không tìm thấy ảnh phù hợp", Toast.LENGTH_SHORT).show()
+        }
+
+        // Cập nhật dot khi trang thay đổi
+        binding.viewpage2SetWallpaper.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                customDotsIndicator.updateDots(position)
+            }
+        })
+    }
 
 
     private fun navigateTo(targetClass: Class<*>) {
@@ -144,8 +147,6 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
         intent.putExtra("POSITION", position)
         startActivity(intent)
     }
-
-
 
 
     private fun showDialogChoose() {
@@ -219,7 +220,12 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
 
                         // Đặt hình nền cho màn hình khóa nếu có hỗ trợ
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_LOCK)
+                            wallpaperManager.setBitmap(
+                                bitmap,
+                                null,
+                                true,
+                                WallpaperManager.FLAG_LOCK
+                            )
                         }
                         startActivity(
                             Intent(
