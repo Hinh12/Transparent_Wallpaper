@@ -1,27 +1,26 @@
 package com.example.transparent_wallpaper.Screen.SetWallpaper
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.app.WallpaperManager
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.amazic.ads.callback.AdCallback
+import com.amazic.ads.callback.InterCallback
+import com.amazic.ads.util.Admob
+import com.amazic.ads.util.AdsSplash
+import com.amazic.ads.util.manager.banner.BannerBuilder
+import com.amazic.ads.util.manager.banner.BannerManager
 import com.example.transparent_wallpaper.Base.BaseActivity
 import com.example.transparent_wallpaper.Base.BaseViewModel
 import com.example.transparent_wallpaper.Model.HdWallpaperModel
@@ -31,6 +30,7 @@ import com.example.transparent_wallpaper.Screen.HDWallpaper.SuccessActivity
 import com.example.transparent_wallpaper.ViewModel.CustomDotsIndicator
 import com.example.transparent_wallpaper.databinding.ActivitySetWallpaperBinding
 import com.example.transparent_wallpaper.databinding.DialogChooseScreenBinding
+import com.google.android.gms.ads.interstitial.InterstitialAd
 import java.io.IOException
 
 class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewModel>() {
@@ -38,6 +38,8 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
 
     private lateinit var list: List<HdWallpaperModel>
     private lateinit var nativeFrameAds: FrameLayout
+    private lateinit var bannerManager: BannerManager
+    private var adsSplashNew: AdsSplash? = null
 
 
     override fun createBinding() = ActivitySetWallpaperBinding.inflate(layoutInflater)
@@ -46,10 +48,38 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
 
     override fun viewModel() {}
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_set_wallpaper)
+    private fun SetWallActivity() {
+        startActivity(Intent(this@SetWallpaperActivity, HDWallpaperActivity::class.java))
+        finish()
+    }
+    private val adCallBack: AdCallback = object : AdCallback() {
+        override fun onNextAction() {
+            super.onNextAction()
+            SetWallActivity()
+        }
+    }
+
+    private val interCallbackNew: InterCallback = object : InterCallback() {
+        override fun onNextAction() {
+            super.onNextAction()
+            SetWallActivity()
+        }
+
+        override fun onAdLoadSuccess(interstitialAd: InterstitialAd?) {
+            super.onAdLoadSuccess(interstitialAd)
+        }
+
+    }
+
+    override fun initView() {
+        super.initView()
+
+        // Load banner quảng cáo
+        val bannerBuilder = BannerBuilder(this, this)
+            .initId(listOf(getString(R.string.banner_all))) // ID banner thực tế
+        bannerManager = BannerManager(bannerBuilder)
+        bannerManager?.setReloadAds()
+
 
         binding = ActivitySetWallpaperBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -123,7 +153,7 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
             binding.viewpage2SetWallpaper.setCurrentItem(position, false)
         } ?: run {
             // Xử lý nếu không tìm thấy ảnh phù hợp
-            Toast.makeText(this, "Không tìm thấy ảnh phù hợp", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Không tìm thấy ảnh phù hợp", Toast.LENGTH_SHORT).show()
         }
 
         // Cập nhật dot khi trang thay đổi
@@ -135,19 +165,6 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
             }
         })
     }
-
-
-    private fun navigateTo(targetClass: Class<*>) {
-        val intent = Intent(this, targetClass)
-        startActivity(intent)
-    }
-
-    private fun navigateToAddPosition(targetClass: Class<*>, position: Int) {
-        val intent = Intent(this, targetClass)
-        intent.putExtra("POSITION", position)
-        startActivity(intent)
-    }
-
 
     private fun showDialogChoose() {
         val dialogChooseScreenBinding = DialogChooseScreenBinding.inflate(layoutInflater)

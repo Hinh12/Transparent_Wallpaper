@@ -6,6 +6,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.amazic.ads.util.AppOpenManager
+import com.amazic.ads.util.manager.banner.BannerBuilder
+import com.amazic.ads.util.manager.banner.BannerManager
 import com.example.transparent_wallpaper.Base.BaseActivity
 import com.example.transparent_wallpaper.Model.LanguageModel
 import com.example.transparent_wallpaper.R
@@ -16,10 +19,11 @@ import com.example.transparent_wallpaper.ViewModel.LanguageViewModel
 import com.example.transparent_wallpaper.databinding.ActivitySettingLanguageBinding
 import com.example.transparent_wallpaper.view.findActivity
 import com.example.transparent_wallpaper.view.tap
+import com.google.android.gms.ads.appopen.AppOpenAd
 import java.util.Locale
 
 class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, LanguageViewModel>() {
-
+    private var bannerManager: BannerManager? = null
 
     override fun createBinding() = ActivitySettingLanguageBinding.inflate(layoutInflater)
 
@@ -36,7 +40,11 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
             viewModel.setSelectedLanguage(this, language)
             updateSaveButtonVisibility(language)
         }
-
+        // Load banner quảng cáo
+        val bannerBuilder = BannerBuilder(this, this)
+            .initId(listOf(getString(R.string.banner_all))) // ID banner thực tế
+        bannerManager = BannerManager(bannerBuilder)
+        bannerManager?.setReloadAds()
 
         val rcvLanguageSetting = findViewById<RecyclerView>(R.id.rcvSettingFrag)
         rcvLanguageSetting.layoutManager = LinearLayoutManager(this)
@@ -47,14 +55,11 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
             loadSelectedLanguage()
         }
 
-
-
         viewModel.languageSetting(this)
 
         binding.imgbtnback.setOnClickListener {
             finish()
         }
-
 
 
         binding.imgbtnsettingSaveLanguage.tap {
@@ -70,8 +75,14 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
             }
         }
 
+
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        AppOpenManager.getInstance().disableAppResumeWithActivity(this.javaClass)
+    }
 
 
 
@@ -84,7 +95,6 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
             }
         }
     }
-
     private fun restoreLocale() {
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         val languageCode = sharedPreferences.getString("selected_language", "en")
@@ -110,8 +120,6 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
             View.GONE
         }
     }
-
-
 
 
 }
