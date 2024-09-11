@@ -11,8 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#101828"
-        >
+        android:background="#101828">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,19 +23,19 @@
                 android:id="@+id/cst_Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="16sp"
+                android:layout_marginLeft="16sp"
                 android:layout_marginTop="30dp"
+                android:layout_marginRight="16sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginLeft="16sp">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/imgBackk"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:src="@drawable/ic_back"
                     android:layout_marginRight="20dp"
+                    android:src="@drawable/ic_back"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -46,23 +45,23 @@
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|center_horizontal"
-                    android:fontFamily="@font/angkor_regular"
-                    android:text="@string/hd_wallpapers"
-                    android:textColor="#ffffff"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:layout_marginRight="40dp"
                     android:layout_marginLeft="40dp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-
+                    android:layout_marginRight="40dp"
                     android:ellipsize="marquee"
-                    android:marqueeRepeatLimit="marquee_forever"
-                    android:singleLine="true"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:scrollHorizontally="true"/>
+                    android:fontFamily="@font/angkor_regular"
+                    android:gravity="center"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+
+                    android:text="@string/hd_wallpapers"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -77,6 +76,14 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cst_Title"
                 tools:listitem="@layout/item_rcv_hdwallpaper" />
+            <include
+                android:id="@+id/include"
+                layout="@layout/layout_banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

@@ -11,55 +11,67 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#101828">
-    <LinearLayout
-        android:id="@+id/ln2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/img_bg_phu"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/ln2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/img_bg_phu"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/native_ads"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16sp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40sp"
+                    android:fontFamily="@font/angkor_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/language"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/imgbtnSaveLanguage"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_check"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvFrag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                tools:listitem="@layout/item_languagescreen" />
+
+
+        </LinearLayout>
+        <FrameLayout
+
+            android:id="@+id/native_ads"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
             android:layout_marginHorizontal="16sp"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/btnback"
-                android:layout_width="wrap_content"
-                android:layout_height="40sp"
-                android:fontFamily="@font/angkor_regular"
-                android:gravity="center_vertical"
-                android:text="@string/language"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-
-                />
-
-            <ImageView
-                android:id="@+id/imgbtnSaveLanguage"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_check"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvFrag"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            tools:listitem="@layout/item_languagescreen" />
-
-
-    </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/ln2"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <include layout="@layout/ads_native_shimer" />
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

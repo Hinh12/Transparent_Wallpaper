@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="210dp"
+            android:layout_marginTop="90dp"
             />
 
         <TextView
@@ -35,6 +35,15 @@
             app:layout_constraintTop_toBottomOf="@+id/imgsuccess"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
+        <FrameLayout
+            android:id="@+id/native_ads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/text_success"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <include layout="@layout/ads_native_shimer" />
+        </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_done"
@@ -51,7 +60,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_success" />
+            app:layout_constraintTop_toBottomOf="@+id/native_ads" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

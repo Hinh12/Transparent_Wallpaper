@@ -9,6 +9,6 @@
     <style name="Theme.Transparent_Wallpaper" parent="Base.Theme.Transparent_Wallpaper" />
 
     <style name="BaseDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowBackground">@android:color/background_light</item>
+        <item name="android:windowBackground">@android:color/black</item>
     </style>
 </resources>

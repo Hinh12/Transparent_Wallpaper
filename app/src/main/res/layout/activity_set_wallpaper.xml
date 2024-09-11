@@ -147,6 +147,12 @@
             app:layout_constraintTop_toBottomOf="@+id/tvSwipe_to_see_more" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_banner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

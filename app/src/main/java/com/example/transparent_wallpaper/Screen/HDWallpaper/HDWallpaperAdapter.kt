@@ -37,12 +37,6 @@ class HDWallpaperAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-//        holder.imgView.setImageResource(list[position].imageUrl)
-//        holder.itemView.setOnClickListener {
-//            mListener?.Onclick(holder.adapterPosition)
-//        }
-
         val item = list[position]
         holder.imgView.setImageResource(item.imageUrl)
         holder.itemView.setOnClickListener {
