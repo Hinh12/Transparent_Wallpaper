@@ -34,8 +34,6 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
     override fun setViewModel() = BaseViewModel()
     override fun initView() {
         super.initView()
-
-
         // Load Interstitial Ad
         loadInterstitialAd()
 
@@ -53,25 +51,19 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
                             or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                     )
-
         }
-
         binding.btnDone.setOnClickListener {
             showInterstitialAd()
         }
-
-
         val list =  ArrayList<String>()
         list.add("ca-app-pub-3940256099942544/2247696110")
         loadNative(
             list,
             binding.nativeAds,
             R.layout.ads_native_shimer_large,
-            R.layout.ads_native_language_start
+            R.layout.ads_native_succes
         )
     }
-
-
     fun loadNative(listId: List<String?>?, frAds: FrameLayout, shimmer: Int, layoutNative: Int) {
         if (AdsConsentManager.getConsentResult(this)) {
             val nativeBuilder = NativeBuilder(this, frAds, shimmer, layoutNative)
@@ -85,8 +77,6 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
             frAds.removeAllViews()
         }
     }
-
-
     private fun loadInterstitialAd() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
@@ -112,7 +102,6 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
                     // Quảng cáo bị tắt, chuyển tới màn hình Home
                     navigateToHome()
                 }
-
                 override fun onAdFailedToShowFullScreenContent(p0: AdError) {
                     // Nếu quảng cáo không hiển thị, chuyển tới màn hình Home
                     navigateToHome()
@@ -124,8 +113,6 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
             navigateToHome()
         }
     }
-
-
     private fun navigateToHome() {
         startActivity(
             Intent(
@@ -142,8 +129,6 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
     override fun onPause() {
         super.onPause()
     }
-
-
     override fun onStop() {
         super.onStop()
     }

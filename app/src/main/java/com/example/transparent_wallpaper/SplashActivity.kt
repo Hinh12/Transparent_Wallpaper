@@ -1,7 +1,8 @@
 package com.example.transparent_wallpaper
 
 import android.content.Intent
-import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import com.amazic.ads.callback.AdCallback
@@ -21,6 +22,7 @@ import java.util.Locale
 
 class SplashActivity : BaseActivity<ActivitySplashBinding, BaseViewModel>() {
     private var adsSplashNew: AdsSplash? = null
+    private val handler = Handler(Looper.getMainLooper())
     private lateinit var bannerManager: BannerManager
 
     override fun createBinding() = ActivitySplashBinding.inflate(layoutInflater)
@@ -44,17 +46,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, BaseViewModel>() {
             startLanguageActivity()
         }
 
-        override fun onAdLoadSuccess(interstitialAd: InterstitialAd?) {
-            super.onAdLoadSuccess(interstitialAd)
-        }
 
     }
-
-
     override fun initView() {
         super.initView()
         setContentView(R.layout.activity_splash)
-
         // Lưu ngôn ngữ của thiết bị
         val currentLanguage = Locale.getDefault().language
         Log.d("Language", currentLanguage)
@@ -69,21 +65,20 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, BaseViewModel>() {
 
         // Load banner quảng cáo
         val bannerBuilder = BannerBuilder(this, this)
-            .initId(listOf(getString(R.string.banner_all))) // ID banner thực tế
+            .initId(listOf(getString(R.string.banner_all)))
         bannerManager = BannerManager(bannerBuilder)
         bannerManager?.setReloadAds()
-        initShowAdsSplashNew()
-        // Start countdown splash
+
+        handler.postDelayed({
+            initShowAdsSplashNew()
+        }, 5000)
+
 
     }
 
 
     private fun initShowAdsSplashNew() {
-        Admob.getInstance().setOpenActivityAfterShowInterAds(true)
-//        Admob.getInstance().setTimeInterval( RemoteConfig.getConfigLong(
-//            baseContext,
-//            RemoteConfig.interval_between_interstitial
-//        ))
+        Admob.getInstance().setTimeInterval(20000L)
         adsSplashNew = AdsSplash.init(
             true,
             true,
@@ -94,7 +89,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, BaseViewModel>() {
         var listInter = ArrayList<String>()
         listInter.add(getString(R.string.inter_splash))
         adsSplashNew?.showAdsSplash(
-            this,
+            this@SplashActivity,
             listOp,
             listInter,
             adCallBack,
@@ -104,7 +99,5 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, BaseViewModel>() {
 
         override fun onResume() {
         super.onResume()
-        adsSplashNew?.onCheckShowSplashWhenFail(this, adCallBack, interCallbackNew)
-        AppOpenManager.getInstance().disableAppResumeWithActivity(this.javaClass)
     }
 }

@@ -12,18 +12,14 @@ import com.example.transparent_wallpaper.R
 class HDWallpaperAdapter(
     private val context: Context,
     private val list: List<HdWallpaperModel>,
-    private val listener: (HdWallpaperModel) -> Unit
+    private val mListener: OnclickItem // Thêm mListener trực tiếp
 ) : RecyclerView.Adapter<HDWallpaperAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgView: ImageView = itemView.findViewById(R.id.img_hdwallpaper)
     }
 
-    private var mListener: OnclickItem? = null
 
-    fun setOnItemClick(listener: OnclickItem?) {
-        mListener = listener
-    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,7 +36,7 @@ class HDWallpaperAdapter(
         val item = list[position]
         holder.imgView.setImageResource(item.imageUrl)
         holder.itemView.setOnClickListener {
-            listener(item) // Gọi lambda với HdWallpaperModel
+            mListener.Onclick(holder.adapterPosition)
         }
 
     }

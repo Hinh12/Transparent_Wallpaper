@@ -10,17 +10,18 @@ import android.os.Build
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.amazic.ads.callback.AdCallback
 import com.amazic.ads.callback.InterCallback
-import com.amazic.ads.util.Admob
-import com.amazic.ads.util.AdsSplash
+import com.amazic.ads.util.AdsConsentManager
+import com.amazic.ads.util.AppOpenManager
 import com.amazic.ads.util.manager.banner.BannerBuilder
 import com.amazic.ads.util.manager.banner.BannerManager
+import com.amazic.ads.util.manager.native_ad.NativeBuilder
+import com.amazic.ads.util.manager.native_ad.NativeManager
 import com.example.transparent_wallpaper.Base.BaseActivity
 import com.example.transparent_wallpaper.Base.BaseViewModel
 import com.example.transparent_wallpaper.Model.HdWallpaperModel
@@ -28,6 +29,7 @@ import com.example.transparent_wallpaper.R
 import com.example.transparent_wallpaper.Screen.HDWallpaper.HDWallpaperActivity
 import com.example.transparent_wallpaper.Screen.HDWallpaper.SuccessActivity
 import com.example.transparent_wallpaper.ViewModel.CustomDotsIndicator
+import com.example.transparent_wallpaper.ads.InterManage
 import com.example.transparent_wallpaper.databinding.ActivitySetWallpaperBinding
 import com.example.transparent_wallpaper.databinding.DialogChooseScreenBinding
 import com.google.android.gms.ads.interstitial.InterstitialAd
@@ -37,9 +39,8 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
 
 
     private lateinit var list: List<HdWallpaperModel>
-    private lateinit var nativeFrameAds: FrameLayout
-    private lateinit var bannerManager: BannerManager
-    private var adsSplashNew: AdsSplash? = null
+    private var bannerManager: BannerManager? = null
+    private var nativeManager: NativeManager? = null
 
 
     override fun createBinding() = ActivitySetWallpaperBinding.inflate(layoutInflater)
@@ -73,12 +74,6 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
 
     override fun initView() {
         super.initView()
-
-        // Load banner quảng cáo
-        val bannerBuilder = BannerBuilder(this, this)
-            .initId(listOf(getString(R.string.banner_all))) // ID banner thực tế
-        bannerManager = BannerManager(bannerBuilder)
-        bannerManager?.setReloadAds()
 
 
         binding = ActivitySetWallpaperBinding.inflate(layoutInflater)
@@ -128,23 +123,18 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
         // Set the current item based on the intent extra
         val position = intent.getIntExtra("position", 0)
         binding.viewpage2SetWallpaper.setCurrentItem(position)
-
         // Set up button click listener
         binding.btnSetWallpaper.setOnClickListener {
             showDialogChoose()
         }
-
         // Set up back button listener
         binding.imgBackT.setOnClickListener {
             startActivity(Intent(this, HDWallpaperActivity::class.java))
         }
-
         // Nhận IMAGE_ID từ intent
         val imageId = intent.getIntExtra("IMAGE_ID", -1)
-
         // Tìm ảnh trong danh sách dựa trên ID
         val selectedModel = list.find { it.idImage == imageId }
-
         selectedModel?.let {
             // Hiển thị ảnh trong ViewPager2
             val position = list.indexOf(it)
@@ -155,7 +145,6 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
             // Xử lý nếu không tìm thấy ảnh phù hợp
             //Toast.makeText(this, "Không tìm thấy ảnh phù hợp", Toast.LENGTH_SHORT).show()
         }
-
         // Cập nhật dot khi trang thay đổi
         binding.viewpage2SetWallpaper.registerOnPageChangeCallback(object :
             ViewPager2.OnPageChangeCallback() {
@@ -164,8 +153,35 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
                 customDotsIndicator.updateDots(position)
             }
         })
+
+
+
+
+
+        val list =  ArrayList<String>()
+        list.add("ca-app-pub-3940256099942544/2247696110")
+        loadNative(
+            list,
+            binding.nativeAdsSetwallpaper,
+            R.layout.ads_native_shimer_large,
+            R.layout.ads_native_large_setwallpaper
+        )
     }
 
+
+    fun loadNative(listId: List<String?>?, frAds: FrameLayout, shimmer: Int, layoutNative: Int) {
+        if (AdsConsentManager.getConsentResult(this)) {
+            val nativeBuilder = NativeBuilder(this, frAds, shimmer, layoutNative)
+            nativeBuilder.setListIdAd(listId)
+            nativeManager = NativeManager(
+                this,
+                this, nativeBuilder
+            )
+        } else {
+            frAds.visibility = View.GONE
+            frAds.removeAllViews()
+        }
+    }
     private fun showDialogChoose() {
         val dialogChooseScreenBinding = DialogChooseScreenBinding.inflate(layoutInflater)
         val builder = AlertDialog.Builder(this)
@@ -173,8 +189,7 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
         val dialog = builder.create() // Create and store AlertDialog into variable
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
-
-
+        
         dialogChooseScreenBinding.cstLockScreen.setOnClickListener {
             dialogChooseScreenBinding.imgradioLockScreen.visibility = View.VISIBLE
             dialogChooseScreenBinding.imgradioHomeScreen.visibility = View.GONE
@@ -261,5 +276,8 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
 
 }

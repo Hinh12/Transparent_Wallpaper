@@ -91,25 +91,17 @@ class LanguageViewModel : BaseViewModel() {
         }
         langDevice = preferredLanguage.toString()
         codeLang = preferredLanguage.toString()
-//        listLanguage.forEachIndexed { index, language ->
-//            if (index != 0) {
-//                listLanguage[index] = language.copy(active = false)
-//            }
-//        }
 
         _langDevice.postValue(langDevice)
         _codeLang.postValue(codeLang)
         languages.postValue(listLanguage)
     }
-
-
     // Lưu ngôn ngữ đã chọn và cập nhật vào LiveData (Save the selected language and update LiveData)
     fun setSelectedLanguage(context: Context, language: LanguageModel) {
         selectedLanguage.value = language
         _codeLang.postValue(language.code)
         saveSelectedLanguage(context, language.code)
     }
-
     // Lưu mã ngôn ngữ vào SharedPreferences (Store the language code in SharedPreferences)
     private fun saveSelectedLanguage(context: Context, languageCode: String) {
         val sharedPreferences = context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
