@@ -9,8 +9,6 @@ import com.amazic.ads.callback.AdCallback
 import com.amazic.ads.callback.InterCallback
 import com.amazic.ads.util.Admob
 import com.amazic.ads.util.AdsSplash
-import com.amazic.ads.util.AppOpenManager
-import com.amazic.ads.util.manager.banner.BannerManager
 import com.example.transparent_wallpaper.Base.BaseActivity
 import com.example.transparent_wallpaper.Base.BaseViewModel
 import com.example.transparent_wallpaper.Model.HdWallpaperModel
@@ -19,7 +17,6 @@ import com.example.transparent_wallpaper.Screen.Home.HomeActivity
 import com.example.transparent_wallpaper.Screen.SetWallpaper.SetWallpaperActivity
 import com.example.transparent_wallpaper.ads.InterManage
 import com.example.transparent_wallpaper.databinding.ActivityHdwallpaperBinding
-import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
@@ -116,12 +113,10 @@ private fun startActivity1(possition: Int){
         super.onResume()
         Log.d("TAG123", "onResume: ")
     }
-
     private fun navigateTo(targetClass: Class<*>) {
         val intent = Intent(this, targetClass)
         startActivity(intent)
     }
-
     override fun onDestroy() {
         super.onDestroy()
         adView?.destroy()

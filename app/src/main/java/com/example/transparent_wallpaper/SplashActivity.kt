@@ -100,4 +100,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, BaseViewModel>() {
         override fun onResume() {
         super.onResume()
     }
+
+    override fun onStop() {
+        super.onStop()
+        finish()
+    }
 }

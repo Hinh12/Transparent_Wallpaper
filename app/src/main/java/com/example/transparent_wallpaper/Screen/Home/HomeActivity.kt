@@ -19,29 +19,27 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.amazic.ads.callback.AdCallback
 import com.amazic.ads.callback.InterCallback
-import com.amazic.ads.util.Admob
-import com.amazic.ads.util.AdsConsentManager
 import com.amazic.ads.util.AdsSplash
 import com.amazic.ads.util.AppOpenManager
-import com.amazic.ads.util.manager.banner.BannerManager
 import com.amazic.ads.util.manager.native_ad.NativeBuilder
 import com.amazic.ads.util.manager.native_ad.NativeManager
-import com.example.transparent_wallpaper.AdManager
 import com.example.transparent_wallpaper.Base.BaseActivity
 import com.example.transparent_wallpaper.Model.Rate
-import com.example.transparent_wallpaper.MyApplication
 import com.example.transparent_wallpaper.R
 import com.example.transparent_wallpaper.Screen.HDWallpaper.HDWallpaperActivity
 import com.example.transparent_wallpaper.Screen.Setting.SettingLanguageActivity
+import com.example.transparent_wallpaper.Utils.SharePrefUtils
 import com.example.transparent_wallpaper.ViewModel.HomeViewModel
 import com.example.transparent_wallpaper.ads.InterManage
 import com.example.transparent_wallpaper.databinding.ActivityHomeBinding
-import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.appopen.AppOpenAd
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.material.navigation.NavigationView
+import com.google.android.play.core.review.ReviewManager
+import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.android.gms.tasks.Task
+
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
 
@@ -211,9 +209,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
         }
     }
 
+
+
     override fun onResume() {
         super.onResume()
         check = false
+        AppOpenManager.getInstance().enableAppResumeWithActivity(HomeActivity::class.java)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -312,19 +313,19 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     }
 
     private fun onRateAppNew() {
-        val manager = ReviewManagerFactory.create(this)
-        val request = manager.requestReviewFlow()
+        val manager: ReviewManager?
+        var reviewInfo: ReviewInfo?
+        manager = ReviewManagerFactory.create(this)
+        val request: Task<ReviewInfo> = manager.requestReviewFlow()
         request.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val reviewInfo = task.result
-                val flow = manager.launchReviewFlow(this, reviewInfo!!)
-                flow.addOnCompleteListener {
-                    // Sau khi hoàn tất luồng đánh giá, điều hướng người dùng đến Google Play
+                SharePrefUtils.forceRated(this)
+                reviewInfo = task.result
+                val flow: Task<Void> =
+                    manager.launchReviewFlow(this, reviewInfo!!)
+                flow.addOnSuccessListener {
                     rateAppOnStoreNew()
                 }
-            } else {
-                // Nếu không thành công, điều hướng người dùng trực tiếp đến Google Play
-                rateAppOnStoreNew()
             }
         }
     }

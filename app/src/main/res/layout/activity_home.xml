@@ -80,8 +80,7 @@
                                 android:layout_height="match_parent"
                                 android:scaleType="fitXY"
                                 android:src="@drawable/img_transparent_wallpaper"
-                                tools:layout_editor_absoluteX="0dp"
-                                tools:layout_editor_absoluteY="0dp" />
+                                />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -130,15 +129,14 @@
                     </androidx.cardview.widget.CardView>
 
                     <FrameLayout
-                        android:layout_marginHorizontal="12dp"
-                        app:layout_constraintTop_toBottomOf="@id/cardTransparentWallpaper"
                         android:id="@+id/native_ads_home"
-                        android:layout_marginBottom="12dp"
-                        android:layout_marginTop="12dp"
                         android:layout_width="match_parent"
-                        android:background="#192439"
-                        android:layout_height="wrap_content">
-                        <include layout="@layout/ads_native_shimer_large" />
+                        android:layout_height="208dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/custom_br_native"
+                        app:layout_constraintTop_toBottomOf="@+id/cardTransparentWallpaper">
+                        <include layout="@layout/ads_native_shimer" />
                     </FrameLayout>
 
 

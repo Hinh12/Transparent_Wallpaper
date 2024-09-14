@@ -155,17 +155,24 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
         })
 
 
+        InterManage.loadInterAll(this@SetWallpaperActivity)
+        try {
+
+            val list: MutableList<String> = ArrayList()
+            list.add(getString(R.string.native_language))
+            val builder = NativeBuilder(
+                this, binding.nativeAdsSetwallpaper,
+                R.layout.ads_native_shimmer_setwp, R.layout.ads_native_layout_setwp
+            )
+            builder.setListIdAd(list)
+            nativeManager = NativeManager(this, this, builder)
 
 
-
-        val list =  ArrayList<String>()
-        list.add("ca-app-pub-3940256099942544/2247696110")
-        loadNative(
-            list,
-            binding.nativeAdsSetwallpaper,
-            R.layout.ads_native_shimer_large,
-            R.layout.ads_native_large_setwallpaper
-        )
+        } catch (e: Exception) {
+            e.printStackTrace()
+            binding.nativeAdsSetwallpaper.removeAllViews()
+            binding.nativeAdsSetwallpaper.setVisibility(View.INVISIBLE)
+        }
     }
 
 

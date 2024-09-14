@@ -19,19 +19,14 @@ class HDWallpaperAdapter(
         val imgView: ImageView = itemView.findViewById(R.id.img_hdwallpaper)
     }
 
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_rcv_hdwallpaper, parent, false)
         return ViewHolder(view)
     }
-
     override fun getItemCount(): Int {
         return list.size
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = list[position]
         holder.imgView.setImageResource(item.imageUrl)
