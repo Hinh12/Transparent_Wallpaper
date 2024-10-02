@@ -36,7 +36,6 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
         super.initView()
         // Load Interstitial Ad
         loadInterstitialAd()
-
         // Ẩn thanh điều hướng
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.let { controller ->
@@ -81,13 +80,12 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
             this,
-            "ca-app-pub-3940256099942544/1033173712",  // Thay bằng ID quảng cáo của bạn
+            "ca-app-pub-3940256099942544/1033173712",
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     mInterstitialAd = interstitialAd
                 }
-
                 override fun onAdFailedToLoad(adError: com.google.android.gms.ads.LoadAdError) {
                     mInterstitialAd = null
                 }
@@ -99,7 +97,6 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
         if (mInterstitialAd != null) {
             mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
-                    // Quảng cáo bị tắt, chuyển tới màn hình Home
                     navigateToHome()
                 }
                 override fun onAdFailedToShowFullScreenContent(p0: AdError) {

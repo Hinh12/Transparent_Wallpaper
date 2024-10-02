@@ -153,11 +153,8 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
                 customDotsIndicator.updateDots(position)
             }
         })
-
-
         InterManage.loadInterAll(this@SetWallpaperActivity)
         try {
-
             val list: MutableList<String> = ArrayList()
             list.add(getString(R.string.native_language))
             val builder = NativeBuilder(
@@ -166,16 +163,12 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
             )
             builder.setListIdAd(list)
             nativeManager = NativeManager(this, this, builder)
-
-
         } catch (e: Exception) {
             e.printStackTrace()
             binding.nativeAdsSetwallpaper.removeAllViews()
             binding.nativeAdsSetwallpaper.setVisibility(View.INVISIBLE)
         }
     }
-
-
     fun loadNative(listId: List<String?>?, frAds: FrameLayout, shimmer: Int, layoutNative: Int) {
         if (AdsConsentManager.getConsentResult(this)) {
             val nativeBuilder = NativeBuilder(this, frAds, shimmer, layoutNative)
@@ -218,7 +211,6 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
         dialogChooseScreenBinding.btnSelectOptions.setOnClickListener {
             val currentItem = binding.viewpage2SetWallpaper.currentItem
             val currentModel = list[currentItem]
-
             val drawable = resources.getDrawable(currentModel.imageUrl) as BitmapDrawable
             val bitmap = drawable.bitmap
             val wallpaperManager = WallpaperManager.getInstance(this@SetWallpaperActivity)
@@ -239,10 +231,8 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
                                 )
                             )
                         } else {
-
                         }
                     }
-
                     dialogChooseScreenBinding.imgradioHomeScreen.visibility == View.VISIBLE -> {
                         wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_SYSTEM)
                         startActivity(
@@ -256,7 +246,6 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
                     dialogChooseScreenBinding.imgradioBothScreen.visibility == View.VISIBLE -> {
                         // Đặt hình nền cho màn hình chính
                         wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_SYSTEM)
-
                         // Đặt hình nền cho màn hình khóa nếu có hỗ trợ
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                             wallpaperManager.setBitmap(
@@ -273,7 +262,6 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
                             )
                         )
                     }
-
                     else -> {
                     }
                 }
@@ -282,9 +270,7 @@ class SetWallpaperActivity : BaseActivity<ActivitySetWallpaperBinding, BaseViewM
             }
         }
     }
-
     override fun onResume() {
         super.onResume()
     }
-
 }
