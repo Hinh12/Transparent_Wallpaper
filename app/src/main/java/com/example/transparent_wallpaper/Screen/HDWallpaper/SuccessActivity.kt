@@ -34,11 +34,8 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
     override fun setViewModel() = BaseViewModel()
     override fun initView() {
         super.initView()
-
-
         // Load Interstitial Ad
         loadInterstitialAd()
-
         // Ẩn thanh điều hướng
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.let { controller ->
@@ -53,25 +50,19 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
                             or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                     )
-
         }
-
         binding.btnDone.setOnClickListener {
             showInterstitialAd()
         }
-
-
         val list =  ArrayList<String>()
         list.add("ca-app-pub-3940256099942544/2247696110")
         loadNative(
             list,
             binding.nativeAds,
             R.layout.ads_native_shimer_large,
-            R.layout.ads_native_language_start
+            R.layout.ads_native_succes
         )
     }
-
-
     fun loadNative(listId: List<String?>?, frAds: FrameLayout, shimmer: Int, layoutNative: Int) {
         if (AdsConsentManager.getConsentResult(this)) {
             val nativeBuilder = NativeBuilder(this, frAds, shimmer, layoutNative)
@@ -85,19 +76,16 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
             frAds.removeAllViews()
         }
     }
-
-
     private fun loadInterstitialAd() {
         val adRequest = AdRequest.Builder().build()
         InterstitialAd.load(
             this,
-            "ca-app-pub-3940256099942544/1033173712",  // Thay bằng ID quảng cáo của bạn
+            "ca-app-pub-3940256099942544/1033173712",
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     mInterstitialAd = interstitialAd
                 }
-
                 override fun onAdFailedToLoad(adError: com.google.android.gms.ads.LoadAdError) {
                     mInterstitialAd = null
                 }
@@ -109,10 +97,8 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
         if (mInterstitialAd != null) {
             mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
-                    // Quảng cáo bị tắt, chuyển tới màn hình Home
                     navigateToHome()
                 }
-
                 override fun onAdFailedToShowFullScreenContent(p0: AdError) {
                     // Nếu quảng cáo không hiển thị, chuyển tới màn hình Home
                     navigateToHome()
@@ -124,8 +110,6 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
             navigateToHome()
         }
     }
-
-
     private fun navigateToHome() {
         startActivity(
             Intent(
@@ -142,8 +126,6 @@ class SuccessActivity : BaseActivity<ActivitySuccessBinding,BaseViewModel>() {
     override fun onPause() {
         super.onPause()
     }
-
-
     override fun onStop() {
         super.onStop()
     }

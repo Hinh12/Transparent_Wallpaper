@@ -9,20 +9,19 @@ import com.amazic.ads.callback.AdCallback
 import com.amazic.ads.callback.InterCallback
 import com.amazic.ads.util.Admob
 import com.amazic.ads.util.AdsSplash
-import com.amazic.ads.util.AppOpenManager
-import com.amazic.ads.util.manager.banner.BannerManager
 import com.example.transparent_wallpaper.Base.BaseActivity
 import com.example.transparent_wallpaper.Base.BaseViewModel
 import com.example.transparent_wallpaper.Model.HdWallpaperModel
 import com.example.transparent_wallpaper.R
 import com.example.transparent_wallpaper.Screen.Home.HomeActivity
 import com.example.transparent_wallpaper.Screen.SetWallpaper.SetWallpaperActivity
+import com.example.transparent_wallpaper.ads.InterManage
 import com.example.transparent_wallpaper.databinding.ActivityHdwallpaperBinding
-import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 
-class HDWallpaperActivity : BaseActivity<ActivityHdwallpaperBinding, BaseViewModel>() {
+class HDWallpaperActivity : BaseActivity<ActivityHdwallpaperBinding, BaseViewModel>(),OnclickItem {
 
     private lateinit var adapter: HDWallpaperAdapter
     private lateinit var list: List<HdWallpaperModel>
@@ -63,6 +62,7 @@ class HDWallpaperActivity : BaseActivity<ActivityHdwallpaperBinding, BaseViewMod
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 )
+        InterManage.loadInterAll(this@HDWallpaperActivity)
 
         binding.imgBackk.setOnClickListener {
             navigateTo(HomeActivity::class.java)
@@ -74,9 +74,9 @@ class HDWallpaperActivity : BaseActivity<ActivityHdwallpaperBinding, BaseViewMod
         val listID: MutableList<String?> = ArrayList()  // Xác định rõ kiểu dữ liệu là String
         listID.add(getString(R.string.admob_Collapsible_id))
         val admob = Admob.getInstance() ?: return
-// Tải banner có thể thu gọn ở phía dưới màn hình
+        // Tải banner có thể thu gọn ở phía dưới màn hình
         admob.loadCollapsibleBannerFloor(this@HDWallpaperActivity, listID, "bottom")
-// Tải banner có thể thu gọn với chức năng tự động tải lại
+        // Tải banner có thể thu gọn với chức năng tự động tải lại
         admob.loadCollapsibleBannerFloorWithReload(this, listID, lifecycle)
 
 
@@ -96,63 +96,48 @@ class HDWallpaperActivity : BaseActivity<ActivityHdwallpaperBinding, BaseViewMod
 
         val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.rcvHdWallpaper.layoutManager = layoutManager
+        adapter = HDWallpaperAdapter(this, list, this)  // Truyền mListener là 'this'
 
-        // Initialize the adapter with a lambda for item click listener
-        adapter = HDWallpaperAdapter(this, list) { model ->
-            navigateToSetWallpaperActivity(model.idImage)
-        }
         binding.rcvHdWallpaper.adapter = adapter
 
 
-    }
 
-    private fun initShowAdsSplashNew(imageId: Int) {
-        Admob.getInstance().setOpenActivityAfterShowInterAds(true)
-        adsSplashNew = AdsSplash.init(
-            true,
-            true,
-            "30_70"
-        )
-        val listOp = ArrayList<String>()
-        listOp.add(getString(R.string.open_splash))
-        val listInter = ArrayList<String>()
-        listInter.add(getString(R.string.inter_splash))
-        adsSplashNew?.showAdsSplash(
-            this,
-            listOp,
-            listInter,
-            object : AdCallback() {
-                override fun onNextAction() {
-                    super.onNextAction()
-                    val intent = Intent(this@HDWallpaperActivity, SetWallpaperActivity::class.java)
-                    intent.putExtra("IMAGE_ID", imageId)
-                    startActivity(intent)
-                }
-            },
-            interCallbackNew
-        )
-    }
 
+    }
+private fun startActivity1(possition: Int){
+    val intent = Intent(this@HDWallpaperActivity, SetWallpaperActivity::class.java)
+    intent.putExtra("position", possition)
+    startActivity(intent)
+}
     override fun onResume() {
         super.onResume()
-        adsSplashNew?.onCheckShowSplashWhenFail(this, adCallBack, interCallbackNew)
-        AppOpenManager.getInstance().disableAppResumeWithActivity(this.javaClass)
         Log.d("TAG123", "onResume: ")
     }
-
     private fun navigateTo(targetClass: Class<*>) {
         val intent = Intent(this, targetClass)
         startActivity(intent)
     }
-
     override fun onDestroy() {
         super.onDestroy()
         adView?.destroy()
     }
 
+    override fun Onclick(position: Int) {
+        InterManage.showInterAll(this@HDWallpaperActivity, object : InterCallback() {
+            override fun onNextAction() {
+                super.onNextAction()
+                Log.d("TAG", "onNextAction")
+                val intent = Intent(this@HDWallpaperActivity, SetWallpaperActivity::class.java)
+                intent.putExtra("position", position)
+                startActivity(intent)
+            }
 
-    private fun navigateToSetWallpaperActivity(imageId: Int) {
-        initShowAdsSplashNew(imageId)
+            override fun onAdFailedToLoad(i: LoadAdError?) {
+                super.onAdFailedToLoad(i)
+                Log.d("TAG", "onAdFailedToLoad")
+            }
+        })
     }
+
 
 }
