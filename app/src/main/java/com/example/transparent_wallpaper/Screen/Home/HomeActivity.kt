@@ -8,6 +8,7 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
@@ -18,28 +19,27 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.amazic.ads.callback.AdCallback
 import com.amazic.ads.callback.InterCallback
-import com.amazic.ads.util.Admob
-import com.amazic.ads.util.AdsConsentManager
 import com.amazic.ads.util.AdsSplash
 import com.amazic.ads.util.AppOpenManager
-import com.amazic.ads.util.manager.banner.BannerManager
 import com.amazic.ads.util.manager.native_ad.NativeBuilder
 import com.amazic.ads.util.manager.native_ad.NativeManager
-import com.example.transparent_wallpaper.AdManager
 import com.example.transparent_wallpaper.Base.BaseActivity
 import com.example.transparent_wallpaper.Model.Rate
-import com.example.transparent_wallpaper.MyApplication
 import com.example.transparent_wallpaper.R
 import com.example.transparent_wallpaper.Screen.HDWallpaper.HDWallpaperActivity
 import com.example.transparent_wallpaper.Screen.Setting.SettingLanguageActivity
+import com.example.transparent_wallpaper.Utils.SharePrefUtils
 import com.example.transparent_wallpaper.ViewModel.HomeViewModel
+import com.example.transparent_wallpaper.ads.InterManage
 import com.example.transparent_wallpaper.databinding.ActivityHomeBinding
-import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.appopen.AppOpenAd
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.material.navigation.NavigationView
+import com.google.android.play.core.review.ReviewManager
+import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.android.gms.tasks.Task
+
 
 class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
 
@@ -95,22 +95,25 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
         text_typing.isSelected = true
 
 
-        val list =  ArrayList<String>()
-        list.add("ca-app-pub-3940256099942544/2247696110")
-        loadNative(
-            list,
-            binding.nativeAds,
-            R.layout.ads_native_shimer_home,
-            R.layout.ads_native_large_home
-        )
+        InterManage.loadInterAll(this@HomeActivity)
+
+        try {
+
+            val list: MutableList<String> = ArrayList()
+            list.add(getString(R.string.native_language))
+            val builder = NativeBuilder(
+                this, binding.nativeAdsHome,
+                R.layout.ads_native_shimer_home, R.layout.ads_native_home
+            )
+            builder.setListIdAd(list)
+            nativeManager = NativeManager(this, this, builder)
 
 
-        val listID: MutableList<String?> = ArrayList()  // Xác định rõ kiểu dữ liệu là String
-        listID.add(getString(R.string.admob_Collapsible_id))
-        val admob = Admob.getInstance() ?: return
-        admob.loadCollapsibleBannerFloor(this@HomeActivity, listID, "bottom")
-        admob.loadCollapsibleBannerFloorWithReload(this, listID, lifecycle)
-
+        } catch (e: Exception) {
+            e.printStackTrace()
+            binding.nativeAdsHome.removeAllViews()
+            binding.nativeAdsHome.setVisibility(View.INVISIBLE)
+        }
 
         // Set màu gradient cho text trên toolbar
         tpToolbar.setTextColor(Color.WHITE)
@@ -144,11 +147,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
             } else if (item.itemId == R.id.nav_share && !check) {
                 check = true
                 share()
+                AppOpenManager.getInstance().disableAppResumeWithActivity(HomeActivity::class.java)
             } else if (item.itemId == R.id.nav_feedback) {
 //
             } else if (item.itemId == R.id.nav_policy && !check) {
                 check = true
                 openPrivacyPolicy()
+                AppOpenManager.getInstance().disableAppResumeWithActivity(HomeActivity::class.java)
             }
 
             binding.drawerLayoutHome.closeDrawer(GravityCompat.START)
@@ -187,52 +192,29 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
 
         hdWallPaper.setOnClickListener {
             if (!check) {
-                initShowAdsSplashNew()
                 check = true
+                InterManage.showInterAll(this@HomeActivity, object : InterCallback() {
+                    override fun onNextAction() {
+                        super.onNextAction()
+                        Log.d("TAG", "onNextAction")
+                        Home()
+                    }
+
+                    override fun onAdFailedToLoad(i: LoadAdError?) {
+                        super.onAdFailedToLoad(i)
+                        Log.d("TAG", "onAdFailedToLoad")
+                    }
+                })
             }
         }
     }
 
-    private fun initShowAdsSplashNew() {
-        Admob.getInstance().setOpenActivityAfterShowInterAds(true)
-        adsSplashNew = AdsSplash.init(
-            true,
-            true,
-            "30_70"
-        )
-        val listOp = ArrayList<String>()
-        listOp.add(getString(R.string.open_splash))
-        val listInter = ArrayList<String>()
-        listInter.add(getString(R.string.inter_splash))
-        adsSplashNew?.showAdsSplash(
-            this,
-            listOp,
-            listInter,
-            adCallBack,
-            interCallbackNew
-        )
-    }
 
 
     override fun onResume() {
         super.onResume()
         check = false
-        adsSplashNew?.onCheckShowSplashWhenFail(this, adCallBack, interCallbackNew)
-        AppOpenManager.getInstance().disableAppResumeWithActivity(this.javaClass)
-    }
-
-    fun loadNative(listId: List<String?>?, frAds: FrameLayout, shimmer: Int, layoutNative: Int) {
-        if (AdsConsentManager.getConsentResult(this)) {
-            val nativeBuilder = NativeBuilder(this, frAds, shimmer, layoutNative)
-            nativeBuilder.setListIdAd(listId)
-            nativeManager = NativeManager(
-                this,
-                this, nativeBuilder
-            )
-        } else {
-            frAds.visibility = View.GONE
-            frAds.removeAllViews()
-        }
+        AppOpenManager.getInstance().enableAppResumeWithActivity(HomeActivity::class.java)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -331,19 +313,19 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
     }
 
     private fun onRateAppNew() {
-        val manager = ReviewManagerFactory.create(this)
-        val request = manager.requestReviewFlow()
+        val manager: ReviewManager?
+        var reviewInfo: ReviewInfo?
+        manager = ReviewManagerFactory.create(this)
+        val request: Task<ReviewInfo> = manager.requestReviewFlow()
         request.addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val reviewInfo = task.result
-                val flow = manager.launchReviewFlow(this, reviewInfo!!)
-                flow.addOnCompleteListener {
-                    // Sau khi hoàn tất luồng đánh giá, điều hướng người dùng đến Google Play
+                SharePrefUtils.forceRated(this)
+                reviewInfo = task.result
+                val flow: Task<Void> =
+                    manager.launchReviewFlow(this, reviewInfo!!)
+                flow.addOnSuccessListener {
                     rateAppOnStoreNew()
                 }
-            } else {
-                // Nếu không thành công, điều hướng người dùng trực tiếp đến Google Play
-                rateAppOnStoreNew()
             }
         }
     }
@@ -391,11 +373,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding, HomeViewModel>() {
         super.onBackPressed()
         finishAffinity()
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        check = false
-//    }
 
     override fun onRestart() {
         super.onRestart()

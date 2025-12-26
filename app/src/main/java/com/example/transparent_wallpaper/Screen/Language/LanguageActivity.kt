@@ -46,26 +46,6 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding,LanguageViewModel>
             viewModel.setSelectedLanguage(this, language)
             updateSaveButtonVisibility(language)
         }
-//        Admob.getInstance().loadNativeAd(this, getString(R.string.native_language), object : NativeCallback {
-//            override fun onNativeAdLoaded(nativeAd: NativeAd) {
-//                val adView = NativeAdView(this@LanguageActivity)
-//                LayoutInflater.from(this@LanguageActivity)
-//                    .inflate(R.layout.ads_native_large_language, adView, true)
-//
-//                // Find the FrameLayout for the native ad
-//                val adContainer = findViewById<FrameLayout>(R.id.native_ads)
-//                adContainer.removeAllViews()
-//                adContainer.addView(adView)
-//                Admob.getInstance().pushAdsToViewCustom(nativeAd, adView)
-//            }
-//
-//            override fun onAdFailedToLoad() {
-//                Log.d("Ad", "Failed to load native ad")
-//            }
-//        })
-
-
-
 
         val rcvLanguageStart = findViewById<RecyclerView>(R.id.rcvFrag)
         rcvLanguageStart.layoutManager = LinearLayoutManager(this)
@@ -86,7 +66,6 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding,LanguageViewModel>
 
         viewModel.languageStart(this)
 
-        //val imgSave = findViewById<View>(R.id.imgbtnSaveLanguage)
         binding.imgbtnSaveLanguage.tap {
             val selectedLanguage = viewModel.selectedLanguage.value
             if (selectedLanguage != null) {

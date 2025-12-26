@@ -2,7 +2,8 @@
 <com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ad_unit_content"
@@ -56,6 +57,7 @@
             android:text="hellop .this ius dsa dsadsa "
             android:textSize="14sp"
             android:textStyle="bold"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@id/tv_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_icon"
@@ -70,6 +72,7 @@
             android:layout_marginEnd="12dp"
             android:ellipsize="end"
             android:maxLines="2"
+            android:textColor="@color/white"
             android:text="hellop .this ius dsa dsadsa "
             android:textSize="14sp"
             android:alpha="0.5"

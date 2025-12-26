@@ -113,16 +113,15 @@ class Intro1Activity : BaseActivity<ActivityIntro1Binding, BaseViewModel>() {
 
 
     private fun initShowAdsSplashNew() {
-        Admob.getInstance().setOpenActivityAfterShowInterAds(true)
         adsSplashNew = AdsSplash.init(
             true,
             true,
             "30_70"
         )
         var listOp = ArrayList<String>()
-        listOp.add(getString(R.string.open_splash))
+        listOp.add(getString(R.string.inter_intro))
         var listInter = ArrayList<String>()
-        listInter.add(getString(R.string.inter_splash))
+        listInter.add(getString(R.string.inter_intro))
         adsSplashNew?.showAdsSplash(
             this,
             listOp,
@@ -134,8 +133,6 @@ class Intro1Activity : BaseActivity<ActivityIntro1Binding, BaseViewModel>() {
 
     override fun onResume() {
         super.onResume()
-        adsSplashNew?.onCheckShowSplashWhenFail(this, adCallBack, interCallbackNew)
-        AppOpenManager.getInstance().disableAppResumeWithActivity(this.javaClass)
     }
 
 
@@ -153,19 +150,5 @@ class Intro1Activity : BaseActivity<ActivityIntro1Binding, BaseViewModel>() {
         }
     }
 
-    private fun addNative(list: MutableList<Intro>): List<Intro> {
-        val listTmp = mutableListOf<Intro>()
-        listTmp.addAll(list)
-        if (CheckInternet.haveNetworkConnection(this)
-            && AdsConsentManager.getConsentResult(this@Intro1Activity)
-        ) {
-            listTmp.add(3, Intro(-22222))
-        }
-        return listTmp
-    }
 
-    private fun navigateTo(destination: Class<*>) {
-        startActivity(Intent(this, destination))
-        finish()
-    }
 }

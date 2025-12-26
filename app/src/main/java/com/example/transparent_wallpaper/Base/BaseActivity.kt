@@ -21,7 +21,7 @@ import com.example.transparent_wallpaper.Utils.SystemUtils
 abstract class BaseActivity<VB : ViewBinding, V : ViewModel> : AppCompatActivity() {
     protected lateinit var binding: VB
     protected lateinit var viewModel: V
-    private lateinit var appOpenAdManager: AdManager
+
 
     abstract fun createBinding(): VB
     abstract fun setViewModel(): V
@@ -41,13 +41,9 @@ abstract class BaseActivity<VB : ViewBinding, V : ViewModel> : AppCompatActivity
         initView()
         bindView()
         showStatusBar(this)
-        appOpenAdManager = AdManager(this)
-        appOpenAdManager.loadAd()
+
     }
-    override fun onResume() {
-        super.onResume()
-        appOpenAdManager.showAdIfAvailable(this) // Show ad if available when resuming
-    }
+
     private fun showStatusBar(activity: Activity?) {
         try {
             if (activity == null) return

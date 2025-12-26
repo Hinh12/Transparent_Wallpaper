@@ -3,7 +3,6 @@ package com.example.transparent_wallpaper.Screen.Setting
 import android.content.Context
 import android.content.Intent
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amazic.ads.util.AppOpenManager
@@ -17,9 +16,7 @@ import com.example.transparent_wallpaper.Screen.Language.AdapterLanguage
 import com.example.transparent_wallpaper.Utils.SystemUtils
 import com.example.transparent_wallpaper.ViewModel.LanguageViewModel
 import com.example.transparent_wallpaper.databinding.ActivitySettingLanguageBinding
-import com.example.transparent_wallpaper.view.findActivity
 import com.example.transparent_wallpaper.view.tap
-import com.google.android.gms.ads.appopen.AppOpenAd
 import java.util.Locale
 
 class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, LanguageViewModel>() {
@@ -56,7 +53,6 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
         }
 
         viewModel.languageSetting(this)
-
         binding.imgbtnback.setOnClickListener {
             finish()
         }
@@ -81,7 +77,6 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
 
     override fun onResume() {
         super.onResume()
-        AppOpenManager.getInstance().disableAppResumeWithActivity(this.javaClass)
     }
 
 
@@ -104,14 +99,6 @@ class SettingLanguageActivity : BaseActivity<ActivitySettingLanguageBinding, Lan
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
     }
-
-    private fun saveLanguage(languageCode: String) {
-        val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("selected_language", languageCode)
-        editor.apply()
-    }
-
 
     private fun updateSaveButtonVisibility(selectedLanguage: LanguageModel?) {
         binding.imgbtnsettingSaveLanguage.visibility = if (selectedLanguage != null) {
